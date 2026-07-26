@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+web/node_modules/
+
+# Next.js
+web/.next/
+web/out/
+web/.turbo/
+
+# Env
+.env
+.env*.local
+web/.env
+web/.env*.local
+
+# OS / editor
+.DS_Store
+*.log
+.idea/
+.vscode/
+*.swp
+
+# Debug / coverage
+coverage/
+web/coverage/
+
+# TypeScript
+web/next-env.d.ts.bak

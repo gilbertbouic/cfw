@@ -1,0 +1,59 @@
+import Link from "next/link";
+import { Container } from "./Container";
+
+export function Footer() {
+  return (
+    <footer className="mt-auto border-t border-border bg-card">
+      <Container className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="lg:col-span-2">
+          <p className="text-base font-semibold text-foreground">
+            Climate Fund Watch
+          </p>
+          <p className="mt-2 max-w-md text-sm text-muted">
+            A digital public good for climate finance transparency, community
+            verification, and whistleblower-safe integrity reporting. Built once,
+            configurable for any country. Mauritius is the reference pilot.
+          </p>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-foreground">Explore</p>
+          <ul className="mt-3 space-y-2 text-sm text-muted">
+            <li>
+              <Link href="/about" className="hover:text-primary">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/problem-solution" className="hover:text-primary">
+                Problem &amp; Solution
+              </Link>
+            </li>
+            <li>
+              <Link href="/get-involved" className="hover:text-primary">
+                Get involved
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-foreground">Status</p>
+          <ul className="mt-3 space-y-2 text-sm text-muted">
+            <li>Phase B — public narrative site</li>
+            <li>Next — demo project registry &amp; map</li>
+            <li>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-medium text-accent">
+                Demo stage
+              </span>
+            </li>
+          </ul>
+        </div>
+      </Container>
+      <div className="border-t border-border">
+        <Container className="flex flex-col gap-2 py-4 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Climate Fund Watch. All rights reserved.</p>
+          <p>Open by default for public climate finance. Privacy-first for integrity reports.</p>
+        </Container>
+      </div>
+    </footer>
+  );
+}
