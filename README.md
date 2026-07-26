@@ -47,12 +47,16 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deploy (Vercel)
 
-Deploy from the **`web/`** directory with project **Root Directory empty** (the app root is `web`).
+The Next.js app lives in **`web/`**. In the Vercel project settings, **Root Directory must be `web`** (required for GitHub deploys).
 
 ```bash
-cd web
+# From the repository root (recommended)
+cd ~/Documents/cfw
 npx vercel --prod
 ```
+
+Do **not** set Root Directory to empty if the Git repo is connected — that causes:  
+`Couldn't find any 'pages' or 'app' directory`.
 
 ### Custom domain `cfw.mkweli.tech`
 
