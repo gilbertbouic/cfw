@@ -19,6 +19,16 @@ export function Footer() {
           <p className="text-sm font-semibold text-foreground">Explore</p>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
+              <Link href="/projects" className="hover:text-primary">
+                Project registry
+              </Link>
+            </li>
+            <li>
+              <Link href="/map" className="hover:text-primary">
+                Map
+              </Link>
+            </li>
+            <li>
               <Link href="/about" className="hover:text-primary">
                 About
               </Link>
@@ -26,6 +36,11 @@ export function Footer() {
             <li>
               <Link href="/problem-solution" className="hover:text-primary">
                 Problem &amp; Solution
+              </Link>
+            </li>
+            <li>
+              <Link href="/methodology" className="hover:text-primary">
+                Methodology
               </Link>
             </li>
             <li>
@@ -38,11 +53,11 @@ export function Footer() {
         <div>
           <p className="text-sm font-semibold text-foreground">Status</p>
           <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>Phase B — public narrative site</li>
-            <li>Next — demo project registry &amp; map</li>
+            <li>Phase B — narrative site</li>
+            <li>Phase C — demo registry &amp; map</li>
             <li>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-medium text-accent">
-                Demo stage
+                Demo data live
               </span>
             </li>
           </ul>

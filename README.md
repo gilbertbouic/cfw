@@ -12,12 +12,12 @@ A mobile-first climate finance transparency platform with open project/budget tr
 
 | Path | Purpose |
 |------|---------|
-| [`web/`](./web) | Phase B public website (Next.js) |
+| [`web/`](./web) | Public website (Next.js) — narrative + demo registry/map |
 | [`PRODUCT_BUILD_PLAN.md`](./PRODUCT_BUILD_PLAN.md) | Full product, architecture, security, and delivery plan |
-| [`docs/ROADMAP.md`](./docs/ROADMAP.md) | Thin-slice build sequence (narrative → demo tracker → MVP) |
-| [`docs/mauritius/`](./docs/mauritius) | Mauritius research pack (concept notes, pitch, project research) |
+| [`docs/ROADMAP.md`](./docs/ROADMAP.md) | Thin-slice build sequence |
+| [`docs/mauritius/`](./docs/mauritius) | Mauritius research pack |
 
-## Public website (Phase B)
+## Run locally
 
 ```bash
 cd web
@@ -27,17 +27,46 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-**Pages:** Home · About · Problem & Solution · Get involved
+### Main routes
 
-**Next:** Phase C — demo project registry + map with curated sample data.
+| Path | Description |
+|------|-------------|
+| `/` | Landing |
+| `/projects` | Demo project registry (filters + stats) |
+| `/projects/[id]` | Project detail (budget chain, milestones) |
+| `/map` | MapLibre status map |
+| `/methodology` | Demo data disclaimer |
+| `/api/projects` | Open JSON API |
+| `/api/projects.csv` | CSV download |
+| `/about` · `/problem-solution` · `/get-involved` | Narrative pages |
+
+## Deploy (Vercel)
+
+The app lives in **`web/`**. Set that as the Vercel **Root Directory**.
+
+### Option A — Dashboard
+
+1. Import `gilbertbouic/climate-fund-watch` at [vercel.com/new](https://vercel.com/new)
+2. Root Directory: `web`
+3. Framework: Next.js (auto)
+4. Deploy
+
+### Option B — CLI
+
+```bash
+cd web
+npx vercel login
+npx vercel        # preview
+npx vercel --prod # production
+```
 
 ## Product status
 
 - [x] Product build plan (multi-country, two-zone security)
 - [x] Mauritius research / concept materials
 - [x] Phase B public narrative site
-- [ ] Phase C demo registry & map
-- [ ] Community evidence reporting
+- [x] Phase C demo registry, map, open CSV/JSON
+- [ ] Phase D community evidence reporting
 - [ ] Integrity vault + government consoles (after legal/security gates)
 
 ## License / visibility

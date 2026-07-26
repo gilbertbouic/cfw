@@ -47,7 +47,7 @@ export default function HomePage() {
         <Container className="relative py-16 sm:py-20 lg:py-24">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden />
-            Phase B public site · Demo tracker coming next
+            Phase C · Demo project registry &amp; map live
           </div>
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
             Making climate finance{" "}
@@ -63,16 +63,16 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
-              href="/problem-solution"
+              href="/projects"
               className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
             >
-              See the problem &amp; solution
+              Explore demo projects
             </Link>
             <Link
-              href="/about"
+              href="/map"
               className="inline-flex items-center justify-center rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground shadow-sm transition hover:border-primary/40 hover:bg-primary-soft/40"
             >
-              About the platform
+              Open the map
             </Link>
           </div>
           <p className="mt-6 max-w-xl text-sm text-muted">
@@ -206,8 +206,8 @@ export default function HomePage() {
               </p>
               <ol className="mt-6 space-y-3 text-sm">
                 {[
-                  "Phase B (now): Landing, About, Problem & Solution",
-                  "Phase C: Project registry, filters, MapLibre map, open CSV",
+                  "Phase B: Landing, About, Problem & Solution",
+                  "Phase C (now): Registry, filters, MapLibre map, open CSV/JSON",
                   "Phase D: Community evidence reporting",
                   "Later: Integrity vault, council consoles, country packs",
                 ].map((step, idx) => (

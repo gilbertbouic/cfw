@@ -7,6 +7,8 @@ import { Container } from "./Container";
 
 const nav = [
   { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/map", label: "Map" },
   { href: "/about", label: "About" },
   { href: "/problem-solution", label: "Problem & Solution" },
   { href: "/get-involved", label: "Get involved" },
@@ -60,10 +62,10 @@ export function Header() {
 
         <div className="hidden md:block">
           <Link
-            href="/get-involved"
+            href="/projects"
             className="inline-flex items-center rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
           >
-            Partner with us
+            Explore projects
           </Link>
         </div>
 
@@ -122,11 +124,11 @@ export function Header() {
               );
             })}
             <Link
-              href="/get-involved"
+              href="/projects"
               onClick={() => setOpen(false)}
               className="mt-1 rounded-lg bg-primary px-3 py-2.5 text-center text-sm font-semibold text-white"
             >
-              Partner with us
+              Explore projects
             </Link>
           </Container>
         </div>

@@ -15,7 +15,7 @@ Ship a **credible public face + demo tracker** first. Keep architecture decision
 - [x] Organize Mauritius materials under `docs/mauritius/`
 - [x] Document thin-slice roadmap
 
-### Phase B — Public narrative site *(current)*
+### Phase B — Public narrative site
 
 **Audience:** citizens & media (also useful for funders)
 
@@ -24,18 +24,18 @@ Ship a **credible public face + demo tracker** first. Keep architecture decision
 - [x] About (product definition, audiences, principles, MU pilot)
 - [x] Problem & Solution (failure modes, modules, user flow)
 - [x] Get involved (partnership paths + contact stub)
-- [ ] Deploy to Vercel / GitHub Pages (or preferred host)
-- [ ] Confirm public contact email and domain
+- [x] Deploy to Vercel (see README)
+- [ ] Confirm public contact email and custom domain
 
-### Phase C — Public demo tracker
+### Phase C — Public demo tracker *(current)*
 
-- [ ] Project CSV/JSON schema (global MVP fields)
-- [ ] Seed 10–20 curated demo projects from research / open sources
-- [ ] Project list + detail pages
-- [ ] Filters (district, status, hazard, funder)
-- [ ] MapLibre map with status styling
-- [ ] Persistent “demo data” banner and methodology note
-- [ ] CSV download + simple open JSON endpoint
+- [x] Project TypeScript schema (global MVP fields)
+- [x] Seed 15 curated demo projects (MU research + synthetic locals)
+- [x] Project list + detail pages
+- [x] Filters (district, status, hazard, funder, objective, search)
+- [x] MapLibre map with status styling
+- [x] Persistent “demo data” banner and methodology page
+- [x] CSV download + JSON API (`/api/projects`, `/api/projects.csv`)
 
 ### Phase D — Community evidence (light)
 

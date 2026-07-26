@@ -19,10 +19,22 @@ npm start
 ## Pages
 
 - `/` — Landing
-- `/about` — Product definition, audiences, principles
-- `/problem-solution` — Problem table, theory of change, modules
-- `/get-involved` — Partnership paths
+- `/projects` — Demo registry
+- `/projects/[id]` — Detail
+- `/map` — MapLibre map
+- `/methodology` — Data disclaimer
+- `/about` · `/problem-solution` · `/get-involved`
+- `/api/projects` · `/api/projects.csv`
 
 ## Stack
 
-Next.js (App Router) · TypeScript · Tailwind CSS v4
+Next.js (App Router) · TypeScript · Tailwind CSS v4 · MapLibre GL
+
+## Deploy
+
+Root directory for Vercel must be `web/`:
+
+```bash
+npx vercel login
+npx vercel --prod
+```

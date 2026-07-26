@@ -245,9 +245,19 @@ export default function ProblemSolutionPage() {
               What you can use now
             </h2>
             <ul className="mt-4 space-y-2 text-sm text-muted">
-              <li>• This public narrative site (mission, problem, solution)</li>
+              <li>• Public narrative site (mission, problem, solution)</li>
+              <li>
+                •{" "}
+                <Link href="/projects" className="font-semibold text-primary">
+                  Demo project registry
+                </Link>
+                ,{" "}
+                <Link href="/map" className="font-semibold text-primary">
+                  map
+                </Link>
+                , and open CSV/JSON
+              </li>
               <li>• Product build plan and Mauritius research pack in the repo</li>
-              <li>• Clear roadmap to a demo tracker for citizens and media</li>
             </ul>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
@@ -255,8 +265,8 @@ export default function ProblemSolutionPage() {
               What comes next
             </h2>
             <ul className="mt-4 space-y-2 text-sm text-muted">
-              <li>• Curated demo projects (registry + map + CSV)</li>
               <li>• Community evidence form (delivery issues)</li>
+              <li>• Official data-sharing and live council updates</li>
               <li>• Integrity vault &amp; council consoles after legal/security gates</li>
             </ul>
           </div>
