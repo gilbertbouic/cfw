@@ -20,6 +20,26 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-card/90 backdrop-blur-md">
+      {/* Parent hub link — all pages */}
+      <div className="border-b border-border/60 bg-primary-soft/50">
+        <Container className="flex h-9 items-center justify-between gap-3 text-xs sm:text-sm">
+          <a
+            href="https://mkweli.tech"
+            className="inline-flex items-center gap-1.5 font-medium text-primary-dark transition hover:text-primary"
+          >
+            <span aria-hidden className="text-muted">
+              ←
+            </span>
+            <span>
+              Back to <span className="font-semibold">mkweli.tech</span>
+            </span>
+          </a>
+          <span className="hidden text-muted sm:inline">
+            A Mkweli product
+          </span>
+        </Container>
+      </div>
+
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <span
@@ -103,6 +123,12 @@ export function Header() {
           className="border-t border-border bg-card md:hidden"
         >
           <Container className="flex flex-col gap-1 py-3">
+            <a
+              href="https://mkweli.tech"
+              className="rounded-lg px-3 py-2.5 text-sm font-semibold text-primary-dark hover:bg-primary-soft/60"
+            >
+              ← Back to mkweli.tech
+            </a>
             {nav.map((item) => {
               const active =
                 item.href === "/"

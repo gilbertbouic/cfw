@@ -22,6 +22,14 @@ export function Footer() {
               gilbert@mkweli.tech
             </a>
           </p>
+          <p className="mt-2 text-sm">
+            <a
+              href="https://mkweli.tech"
+              className="font-semibold text-primary hover:text-primary-dark"
+            >
+              ← mkweli.tech
+            </a>
+          </p>
         </div>
         <div>
           <p className="text-sm font-semibold text-foreground">Explore</p>
