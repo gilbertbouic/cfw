@@ -1,8 +1,13 @@
-# Climate Fund Watch
+# Climate Fund Watch (`cfw`)
 
 Country-agnostic digital public good for climate finance transparency, community verification, and whistleblower-safe integrity reporting.
 
-**Reference pilot brand:** ClimateFunds Watch Mauritius
+| | |
+|--|--|
+| **Public site** | https://cfw.mkweli.tech (also `climate-fund-watch.vercel.app`) |
+| **GitHub** | https://github.com/gilbertbouic/cfw (private) |
+| **Contact** | gilbert@mkweli.tech · form on [/get-involved](https://cfw.mkweli.tech/get-involved) |
+| **Reference pilot** | ClimateFunds Watch Mauritius |
 
 ## One-line definition
 
@@ -38,27 +43,26 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/methodology` | Demo data disclaimer |
 | `/api/projects` | Open JSON API |
 | `/api/projects.csv` | CSV download |
-| `/about` · `/problem-solution` · `/get-involved` | Narrative pages |
+| `/about` · `/problem-solution` · `/get-involved` | Narrative + contact form |
 
 ## Deploy (Vercel)
 
-The app lives in **`web/`**. Set that as the Vercel **Root Directory**.
-
-### Option A — Dashboard
-
-1. Import `gilbertbouic/climate-fund-watch` at [vercel.com/new](https://vercel.com/new)
-2. Root Directory: `web`
-3. Framework: Next.js (auto)
-4. Deploy
-
-### Option B — CLI
+Deploy from the **`web/`** directory with project **Root Directory empty** (the app root is `web`).
 
 ```bash
 cd web
-npx vercel login
-npx vercel        # preview
-npx vercel --prod # production
+npx vercel --prod
 ```
+
+### Custom domain `cfw.mkweli.tech`
+
+In Hostinger DNS:
+
+| Type | Name | Value |
+|------|------|-------|
+| CNAME | `cfw` | `cname.vercel-dns.com` |
+
+**Not** `gilbertbouic.github.io` — that target is for GitHub Pages sites only. Then add the domain in the Vercel project settings.
 
 ## Product status
 
@@ -66,6 +70,7 @@ npx vercel --prod # production
 - [x] Mauritius research / concept materials
 - [x] Phase B public narrative site
 - [x] Phase C demo registry, map, open CSV/JSON
+- [x] Get involved form → gilbert@mkweli.tech
 - [ ] Phase D community evidence reporting
 - [ ] Integrity vault + government consoles (after legal/security gates)
 

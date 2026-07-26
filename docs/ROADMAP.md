@@ -10,7 +10,7 @@ Ship a **credible public face + demo tracker** first. Keep architecture decision
 
 ### Phase A — Repo hygiene *(done)*
 
-- [x] Connect workspace to `gilbertbouic/climate-fund-watch`
+- [x] Connect workspace to `gilbertbouic/cfw`
 - [x] Keep product build plan at repo root
 - [x] Organize Mauritius materials under `docs/mauritius/`
 - [x] Document thin-slice roadmap

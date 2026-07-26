@@ -26,3 +26,4 @@ web/coverage/
 
 # TypeScript
 web/next-env.d.ts.bak
+vercel recovery-codes.txt

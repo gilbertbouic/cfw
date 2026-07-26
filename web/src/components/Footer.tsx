@@ -14,6 +14,14 @@ export function Footer() {
             verification, and whistleblower-safe integrity reporting. Built once,
             configurable for any country. Mauritius is the reference pilot.
           </p>
+          <p className="mt-3 text-sm">
+            <a
+              href="mailto:gilbert@mkweli.tech"
+              className="font-semibold text-primary hover:text-primary-dark"
+            >
+              gilbert@mkweli.tech
+            </a>
+          </p>
         </div>
         <div>
           <p className="text-sm font-semibold text-foreground">Explore</p>
