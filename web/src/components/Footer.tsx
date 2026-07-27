@@ -16,10 +16,10 @@ export function Footer() {
           </p>
           <p className="mt-3 text-sm">
             <a
-              href="mailto:gilbert@mkweli.tech"
+              href="mailto:support@mkweli.tech"
               className="font-semibold text-primary hover:text-primary-dark"
             >
-              gilbert@mkweli.tech
+              support@mkweli.tech
             </a>
           </p>
           <p className="mt-4">

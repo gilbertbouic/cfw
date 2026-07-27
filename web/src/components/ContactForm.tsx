@@ -24,7 +24,7 @@ export function ContactForm({ thankYouUrl }: Props) {
   const [submitting, setSubmitting] = useState(false);
 
   const action = useMemo(
-    () => "https://formsubmit.co/ajax/gilbert@mkweli.tech",
+    () => "https://formsubmit.co/ajax/support@mkweli.tech",
     [],
   );
 
@@ -58,7 +58,7 @@ export function ContactForm({ thankYouUrl }: Props) {
       const body = encodeURIComponent(
         `Name: ${name}\nOrganisation: ${org}\nEmail: ${email}\nInterest: ${interest}\n\n${message}`,
       );
-      window.location.href = `mailto:gilbert@mkweli.tech?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:support@mkweli.tech?subject=${subject}&body=${body}`;
     } finally {
       setSubmitting(false);
     }
@@ -75,10 +75,10 @@ export function ContactForm({ thankYouUrl }: Props) {
           Thank you. We will reply to the address you provided. For urgent
           matters you can also email{" "}
           <a
-            href="mailto:gilbert@mkweli.tech"
+            href="mailto:support@mkweli.tech"
             className="font-semibold text-primary"
           >
-            gilbert@mkweli.tech
+            support@mkweli.tech
           </a>
           .
         </p>
@@ -183,8 +183,8 @@ export function ContactForm({ thankYouUrl }: Props) {
           Do not use it for confidential integrity or whistleblower reports
         </strong>{" "}
         — a separate safe channel is planned. Messages go to{" "}
-        <a href="mailto:gilbert@mkweli.tech" className="text-primary">
-          gilbert@mkweli.tech
+        <a href="mailto:support@mkweli.tech" className="text-primary">
+          support@mkweli.tech
         </a>
         .
       </p>
@@ -198,10 +198,10 @@ export function ContactForm({ thankYouUrl }: Props) {
           {submitting ? "Sending…" : "Send message"}
         </button>
         <a
-          href="mailto:gilbert@mkweli.tech?subject=Climate%20Fund%20Watch%20%E2%80%94%20Get%20involved"
+          href="mailto:support@mkweli.tech?subject=Climate%20Fund%20Watch%20%E2%80%94%20Get%20involved"
           className="text-sm font-semibold text-primary hover:text-primary-dark"
         >
-          Or email gilbert@mkweli.tech →
+          Or email support@mkweli.tech →
         </a>
       </div>
     </form>

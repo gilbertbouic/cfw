@@ -6,7 +6,7 @@ Country-agnostic digital public good for climate finance transparency, community
 |--|--|
 | **Public site** | https://cfw.mkweli.tech (also `climate-fund-watch.vercel.app`) |
 | **GitHub** | https://github.com/gilbertbouic/cfw (private) |
-| **Contact** | gilbert@mkweli.tech · form on [/get-involved](https://cfw.mkweli.tech/get-involved) |
+| **Contact** | support@mkweli.tech · form on [/get-involved](https://cfw.mkweli.tech/get-involved) |
 | **Reference pilot** | ClimateFunds Watch Mauritius |
 
 ## One-line definition
@@ -74,7 +74,7 @@ In Hostinger DNS:
 - [x] Mauritius research / concept materials
 - [x] Phase B public narrative site
 - [x] Phase C demo registry, map, open CSV/JSON
-- [x] Get involved form → gilbert@mkweli.tech
+- [x] Get involved form → support@mkweli.tech
 - [ ] Phase D community evidence reporting
 - [ ] Integrity vault + government consoles (after legal/security gates)
 

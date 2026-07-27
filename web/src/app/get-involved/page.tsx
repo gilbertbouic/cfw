@@ -7,7 +7,7 @@ import { PageHero } from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "Get involved",
   description:
-    "Partner, pilot, fund, or contribute to Climate Fund Watch. Contact gilbert@mkweli.tech.",
+    "Partner, pilot, fund, or contribute to Climate Fund Watch. Contact support@mkweli.tech.",
 };
 
 const paths = [
@@ -35,7 +35,7 @@ export default function GetInvolvedPage() {
       <PageHero
         eyebrow="Get involved"
         title="Build the climate finance accountability layer with us"
-        description="Whether you represent a ministry, council, donor, CSO, newsroom, or technical partner — use the form below or email gilbert@mkweli.tech."
+        description="Whether you represent a ministry, council, donor, CSO, newsroom, or technical partner — use the form below or email support@mkweli.tech."
       />
 
       <section className="py-14 sm:py-16">
@@ -81,10 +81,10 @@ export default function GetInvolvedPage() {
                 </h2>
                 <p className="mt-3 text-sm text-foreground">
                   <a
-                    href="mailto:gilbert@mkweli.tech"
+                    href="mailto:support@mkweli.tech"
                     className="text-lg font-semibold text-primary hover:text-primary-dark"
                   >
-                    gilbert@mkweli.tech
+                    support@mkweli.tech
                   </a>
                 </p>
                 <p className="mt-2 text-sm text-muted">
