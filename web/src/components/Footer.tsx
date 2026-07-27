@@ -22,12 +22,22 @@ export function Footer() {
               gilbert@mkweli.tech
             </a>
           </p>
-          <p className="mt-2 text-sm">
+          <p className="mt-4">
             <a
               href="https://mkweli.tech"
-              className="font-semibold text-primary hover:text-primary-dark"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark"
             >
-              ← mkweli.tech
+              <img
+                src="/brand/mkweli-logo.png"
+                alt="Mkweli"
+                className="h-6 w-auto dark:hidden"
+              />
+              <img
+                src="/brand/mkweli-logo-on-dark.png"
+                alt="Mkweli"
+                className="hidden h-6 w-auto dark:block"
+              />
+              <span>A Mkweli product</span>
             </a>
           </p>
         </div>
