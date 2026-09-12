@@ -27,15 +27,16 @@ Ship a **credible public face + demo tracker** first. Keep architecture decision
 - [x] Deploy to Vercel (see README)
 - [ ] Confirm public contact email and custom domain
 
-### Phase C — Public demo tracker *(current)*
+### Phase C — Public sourced tracker *(current)*
 
-- [x] Project TypeScript schema (global MVP fields)
-- [x] Seed 15 curated demo projects (MU research + synthetic locals)
-- [x] Project list + detail pages
-- [x] Filters (district, status, hazard, funder, objective, search)
-- [x] MapLibre map with status styling
-- [x] Persistent “demo data” banner and methodology page
-- [x] CSV download + JSON API (`/api/projects`, `/api/projects.csv`)
+- [x] Project TypeScript schema (nullable money fields, required sources)
+- [x] Sourced Mauritius ledger (no synthetic local projects)
+- [x] Project list + detail pages with citations
+- [x] Filters (geography, status, hazard, funder, objective, search)
+- [x] MapLibre map only for sourced / labelled pins
+- [x] Sources page (methodology redirects here)
+- [x] CSV download + JSON API with source URLs
+- [x] Landscape page: need vs tagged spend vs donor channels
 
 ### Phase D — Community evidence (light)
 

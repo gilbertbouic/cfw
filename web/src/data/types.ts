@@ -1,10 +1,8 @@
 export type ProjectStatus =
-  | "pipeline"
   | "approved"
-  | "in_progress"
-  | "delayed"
+  | "under_implementation"
   | "completed"
-  | "cancelled";
+  | "unknown";
 
 export type ClimateObjective =
   | "adaptation"
@@ -21,56 +19,102 @@ export type HazardType =
   | "energy_transition"
   | "multi";
 
+export type RecordKind =
+  | "multilateral_project"
+  | "readiness"
+  | "grant_programme";
+
+export type GeographyScope = "site" | "national" | "multi_country" | "unknown";
+
+export type Confidence =
+  | "official_register"
+  | "government_document"
+  | "secondary_report";
+
+export type SourceRef = {
+  title: string;
+  url: string;
+  publisher: string;
+  asOf: string;
+  notes?: string;
+};
+
+export type PublishedResult = {
+  label: string;
+  sourceUrl: string;
+};
+
 export type Project = {
   id: string;
   title: string;
   summary: string;
+  kind: RecordKind;
   climateObjective: ClimateObjective;
   hazards: HazardType[];
   status: ProjectStatus;
   country: string;
   countryCode: string;
+  geographyScope: GeographyScope;
+  geographyNote: string;
   adminUnit: string;
   district: string;
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
+  pinNote?: string;
+  showOnMap: boolean;
   funders: string[];
   implementingEntities: string[];
-  contractors: string[];
   currency: string;
-  budgetApproved: number;
-  budgetDisbursed: number;
-  budgetSpent: number;
-  cofinancing: number;
+  amountLabel: string;
+  amount: number | null;
+  amountNote?: string;
+  cofinancing: number | null;
+  cofinancingNote?: string;
+  totalValue: number | null;
+  totalValueNote?: string;
+  disbursed: number | null;
+  disbursedNote?: string;
+  mauritiusShare: number | null;
+  mauritiusShareNote?: string;
   startYear: number | null;
   endYear: number | null;
-  milestones: { label: string; done: boolean }[];
-  sources: string[];
-  demoNote?: string;
+  publishedResults: PublishedResult[];
+  sources: SourceRef[];
+  lastReviewed: string;
+  confidence: Confidence;
 };
 
 export const STATUS_LABELS: Record<ProjectStatus, string> = {
-  pipeline: "Pipeline",
   approved: "Approved",
-  in_progress: "In progress",
-  delayed: "Delayed",
+  under_implementation: "Under implementation",
   completed: "Completed",
-  cancelled: "Cancelled",
+  unknown: "Unknown",
 };
 
 export const STATUS_COLORS: Record<ProjectStatus, string> = {
-  pipeline: "#64748b",
   approved: "#1f6f8b",
-  in_progress: "#0d6e5f",
-  delayed: "#c45c26",
+  under_implementation: "#0d6e5f",
   completed: "#1b7f5a",
-  cancelled: "#94a3b8",
+  unknown: "#64748b",
 };
 
 export const OBJECTIVE_LABELS: Record<ClimateObjective, string> = {
   adaptation: "Adaptation",
   mitigation: "Mitigation",
   cross_cutting: "Cross-cutting",
+};
+
+export const KIND_LABELS: Record<RecordKind, string> = {
+  multilateral_project: "Multilateral project",
+  readiness: "Readiness / NAP",
+  grant_programme: "Grant programme",
+};
+
+export const GEOGRAPHY_LABELS: Record<GeographyScope, string> = {
+  site: "Named sites",
+  national: "National / multi-island",
+  multi_country: "Multi-country",
+  unknown: "Unknown",
 };
 
 export const HAZARD_LABELS: Record<HazardType, string> = {
@@ -84,8 +128,19 @@ export const HAZARD_LABELS: Record<HazardType, string> = {
   multi: "Multi-hazard",
 };
 
-export function formatMoney(amount: number, currency = "USD"): string {
-  if (amount == null || Number.isNaN(amount)) return "—";
+export const CONFIDENCE_LABELS: Record<Confidence, string> = {
+  official_register: "Official funder register",
+  government_document: "Government document",
+  secondary_report: "Secondary public report",
+};
+
+export const LEDGER_REVIEWED = "2026-09-12";
+
+export function formatMoney(
+  amount: number | null | undefined,
+  currency = "USD",
+): string {
+  if (amount == null || Number.isNaN(amount)) return "Not published";
   return new Intl.NumberFormat("en", {
     style: "currency",
     currency,
@@ -93,6 +148,14 @@ export function formatMoney(amount: number, currency = "USD"): string {
   }).format(amount);
 }
 
-export function remainingBudget(p: Project): number {
-  return Math.max(0, p.budgetApproved + p.cofinancing - p.budgetSpent);
+export function formatMur(amount: number | null | undefined): string {
+  if (amount == null || Number.isNaN(amount)) return "Not published";
+  return `${new Intl.NumberFormat("en", { maximumFractionDigits: 1 }).format(amount)} MUR`;
+}
+
+/** Display-only: never invent a remainder from unpublished spent figures. */
+export function attributedMauritiusAmount(p: Project): number | null {
+  if (p.mauritiusShare != null) return p.mauritiusShare;
+  if (p.geographyScope === "multi_country") return null;
+  return p.amount;
 }

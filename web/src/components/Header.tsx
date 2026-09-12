@@ -7,10 +7,11 @@ import { Container } from "./Container";
 
 const nav = [
   { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
+  { href: "/projects", label: "Registry" },
+  { href: "/landscape", label: "Landscape" },
   { href: "/map", label: "Map" },
+  { href: "/sources", label: "Sources" },
   { href: "/about", label: "About" },
-  { href: "/problem-solution", label: "Problem & Solution" },
   { href: "/get-involved", label: "Get involved" },
 ];
 
@@ -53,7 +54,7 @@ export function Header() {
               Climate Fund Watch
             </span>
             <span className="hidden text-xs text-muted sm:block">
-              Trace · Verify · Protect
+              Mauritius climate finance, sourced
             </span>
           </span>
         </Link>
@@ -85,7 +86,7 @@ export function Header() {
             href="/projects"
             className="inline-flex items-center rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
           >
-            Explore projects
+            Browse registry
           </Link>
         </div>
 
@@ -154,7 +155,7 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="mt-1 rounded-lg bg-primary px-3 py-2.5 text-center text-sm font-semibold text-white"
             >
-              Explore projects
+              Browse registry
             </Link>
           </Container>
         </div>

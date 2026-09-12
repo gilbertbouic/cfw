@@ -102,7 +102,7 @@ export default function ProblemSolutionPage() {
       <PageHero
         eyebrow="Problem & Solution"
         title="Climate finance without accountability fails the people who need it most"
-        description="Rising hazards and larger portfolios mean little if communities cannot see projects, track money, or safely report failures. Climate Fund Watch closes that loop."
+        description="Rising hazards and larger portfolios mean little if communities cannot see projects, track money, or safely report failures. The modules below describe the product being built. Only the sourced public ledger is live."
       />
 
       {/* Problem */}
@@ -182,10 +182,11 @@ export default function ProblemSolutionPage() {
               Modular platform, two security zones
             </h2>
             <p className="mt-4 text-muted">
-              Climate Fund Watch ships as pluggable modules on a multi-tenant
-              core. Public transparency data is open by default. Integrity
-              reports live in a separate vault with no identity join keys to the
-              public zone.
+              Climate Fund Watch is designed as pluggable modules on a
+              multi-tenant core. Public transparency data is open by default.
+              Integrity reports would live in a separate vault with no identity
+              join keys to the public zone. Community evidence, the integrity
+              channel, and government consoles are not operating on this site.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -216,8 +217,9 @@ export default function ProblemSolutionPage() {
             How it works
           </h2>
           <p className="mt-3 max-w-2xl text-muted">
-            A continuous loop from funding decision to community verification
-            and public accountability.
+            Intended loop from funding decision to community verification and
+            public accountability — a product design, not a description of live
+            workflows.
           </p>
           <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {flow.map((step, i) => (

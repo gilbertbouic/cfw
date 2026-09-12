@@ -22,6 +22,8 @@ These documents support the reference pilot brand **ClimateFunds Watch Mauritius
 
 ## Usage
 
-- Distill public website copy (done for Phase B pages)
-- Seed demo project registry (Phase C)
+- Distill public website copy
+- Inform the sourced ledger (`web/src/data/` + [`SOURCES.md`](./SOURCES.md))
 - Inform country pack taxonomies, hazard focus, and pilot narrative
+
+Do not copy illustrative or synthetic figures from concept notes onto the public site.

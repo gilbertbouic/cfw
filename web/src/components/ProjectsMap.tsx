@@ -77,10 +77,12 @@ export function ProjectsMap({ projects, className = "" }: Props) {
           `<div style="font-family:system-ui,sans-serif;font-size:13px;line-height:1.4">
             <div style="font-weight:700;margin-bottom:4px">${escapeHtml(p.title)}</div>
             <div style="color:#5b6b66;margin-bottom:6px">${STATUS_LABELS[p.status]} · ${escapeHtml(p.district)}</div>
-            <a href="/projects/${encodeURIComponent(p.id)}" style="color:#0d6e5f;font-weight:600;text-decoration:none">Open project →</a>
+            ${p.pinNote ? `<div style="color:#5b6b66;margin-bottom:6px;font-size:12px">${escapeHtml(p.pinNote)}</div>` : ""}
+            <a href="/projects/${encodeURIComponent(p.id)}" style="color:#0d6e5f;font-weight:600;text-decoration:none">Open record →</a>
           </div>`,
         );
 
+        if (p.lng == null || p.lat == null) continue;
         const marker = new Marker({ element: el })
           .setLngLat([p.lng, p.lat])
           .setPopup(popup)
@@ -88,9 +90,13 @@ export function ProjectsMap({ projects, className = "" }: Props) {
         markers.push(marker);
       }
 
-      if (projects.length > 0) {
+      const located = projects.filter(
+        (p): p is typeof p & { lat: number; lng: number } =>
+          p.lat != null && p.lng != null,
+      );
+      if (located.length > 0) {
         const bounds = new LngLatBounds();
-        projects.forEach((p) => bounds.extend([p.lng, p.lat]));
+        located.forEach((p) => bounds.extend([p.lng, p.lat]));
         map.fitBounds(bounds, { padding: 48, maxZoom: 10, duration: 600 });
       }
     };

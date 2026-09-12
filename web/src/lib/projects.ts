@@ -1,5 +1,10 @@
 import { getAllProjects } from "@/data/projects";
-import type { HazardType, Project, ProjectStatus } from "@/data/types";
+import {
+  attributedMauritiusAmount,
+  type HazardType,
+  type Project,
+  type ProjectStatus,
+} from "@/data/types";
 
 export type ProjectFilters = {
   q?: string;
@@ -8,6 +13,7 @@ export type ProjectFilters = {
   hazard?: HazardType | "all";
   funder?: string;
   objective?: string;
+  geography?: string;
 };
 
 export function filterProjects(
@@ -26,6 +32,8 @@ export function filterProjects(
       : null;
   const objective =
     filters.objective && filters.objective !== "all" ? filters.objective : null;
+  const geography =
+    filters.geography && filters.geography !== "all" ? filters.geography : null;
 
   return list.filter((p) => {
     if (status && p.status !== status) return false;
@@ -33,6 +41,7 @@ export function filterProjects(
       return false;
     if (hazard && !p.hazards.includes(hazard)) return false;
     if (objective && p.climateObjective !== objective) return false;
+    if (geography && p.geographyScope !== geography) return false;
     if (
       funder &&
       !p.funders.some((f) => f.toLowerCase().includes(funder))
@@ -44,6 +53,7 @@ export function filterProjects(
         p.summary,
         p.district,
         p.adminUnit,
+        p.id,
         ...p.funders,
         ...p.implementingEntities,
       ]
@@ -67,9 +77,11 @@ export function projectsToCsv(list: Project[]): string {
   const headers = [
     "id",
     "title",
+    "kind",
     "status",
     "climate_objective",
-    "hazards",
+    "geography_scope",
+    "mauritius_share_known",
     "country",
     "district",
     "admin_unit",
@@ -78,15 +90,20 @@ export function projectsToCsv(list: Project[]): string {
     "funders",
     "implementing_entities",
     "currency",
-    "budget_approved",
-    "budget_disbursed",
-    "budget_spent",
+    "amount_label",
+    "amount",
     "cofinancing",
+    "total_value",
+    "disbursed",
+    "mauritius_share",
     "start_year",
     "end_year",
+    "source_urls",
+    "last_reviewed",
+    "confidence",
   ];
 
-  const escape = (v: string | number | null) => {
+  const escape = (v: string | number | null | undefined) => {
     const s = v == null ? "" : String(v);
     if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
     return s;
@@ -96,9 +113,11 @@ export function projectsToCsv(list: Project[]): string {
     [
       p.id,
       p.title,
+      p.kind,
       p.status,
       p.climateObjective,
-      p.hazards.join("|"),
+      p.geographyScope,
+      attributedMauritiusAmount(p) != null ? "yes" : "no",
       p.country,
       p.district,
       p.adminUnit,
@@ -107,12 +126,17 @@ export function projectsToCsv(list: Project[]): string {
       p.funders.join("|"),
       p.implementingEntities.join("|"),
       p.currency,
-      p.budgetApproved,
-      p.budgetDisbursed,
-      p.budgetSpent,
+      p.amountLabel,
+      p.amount,
       p.cofinancing,
+      p.totalValue,
+      p.disbursed,
+      p.mauritiusShare,
       p.startYear ?? "",
       p.endYear ?? "",
+      p.sources.map((s) => s.url).join("|"),
+      p.lastReviewed,
+      p.confidence,
     ]
       .map(escape)
       .join(","),
@@ -122,13 +146,19 @@ export function projectsToCsv(list: Project[]): string {
 }
 
 export function portfolioStats(list = getAllProjects()) {
-  const approved = list.reduce((s, p) => s + p.budgetApproved, 0);
-  const spent = list.reduce((s, p) => s + p.budgetSpent, 0);
-  const delayed = list.filter((p) => p.status === "delayed").length;
+  const mauritiusAttributed = list.filter(
+    (p) => attributedMauritiusAmount(p) != null,
+  );
+  const attributedSum = mauritiusAttributed
+    .filter((p) => p.currency === "USD")
+    .reduce((s, p) => s + (attributedMauritiusAmount(p) ?? 0), 0);
+  const regional = list.filter((p) => p.geographyScope === "multi_country").length;
+  const completed = list.filter((p) => p.status === "completed").length;
   return {
     count: list.length,
-    approved,
-    spent,
-    delayed,
+    attributedSum,
+    attributedCount: mauritiusAttributed.length,
+    regional,
+    completed,
   };
 }

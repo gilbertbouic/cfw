@@ -3,14 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BudgetBar } from "@/components/BudgetBar";
 import { Container } from "@/components/Container";
-import { DemoBanner } from "@/components/DemoBanner";
+import { SourceBanner } from "@/components/SourceBanner";
 import { StatusBadge } from "@/components/StatusBadge";
 import { getAllProjects, getProjectById } from "@/data/projects";
 import {
+  CONFIDENCE_LABELS,
   formatMoney,
+  GEOGRAPHY_LABELS,
   HAZARD_LABELS,
+  KIND_LABELS,
   OBJECTIVE_LABELS,
-  remainingBudget,
 } from "@/data/types";
 
 type Props = { params: Promise<{ id: string }> };
@@ -22,7 +24,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const project = getProjectById(id);
-  if (!project) return { title: "Project not found" };
+  if (!project) return { title: "Record not found" };
   return {
     title: project.title,
     description: project.summary,
@@ -34,23 +36,24 @@ export default async function ProjectDetailPage({ params }: Props) {
   const project = getProjectById(id);
   if (!project) notFound();
 
-  const rem = remainingBudget(project);
-
   return (
     <>
-      <DemoBanner />
+      <SourceBanner />
       <section className="border-b border-border bg-gradient-to-b from-primary-soft/50 to-background">
         <Container className="py-10 sm:py-12">
           <Link
             href="/projects"
             className="text-sm font-semibold text-primary hover:text-primary-dark"
           >
-            ← All projects
+            ← All records
           </Link>
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <StatusBadge status={project.status} />
             <span className="rounded-full bg-card px-2.5 py-0.5 text-xs font-medium text-muted shadow-sm">
               {OBJECTIVE_LABELS[project.climateObjective]}
+            </span>
+            <span className="rounded-full bg-card px-2.5 py-0.5 text-xs font-medium text-muted shadow-sm">
+              {KIND_LABELS[project.kind]}
             </span>
             <span className="text-xs text-muted">{project.id}</span>
           </div>
@@ -58,12 +61,6 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.title}
           </h1>
           <p className="mt-4 max-w-3xl text-muted">{project.summary}</p>
-          {project.demoNote && (
-            <p className="mt-4 max-w-3xl rounded-lg border border-warning/25 bg-accent-soft px-3 py-2 text-sm text-foreground">
-              <span className="font-semibold text-accent">Demo note: </span>
-              {project.demoNote}
-            </p>
-          )}
         </Container>
       </section>
 
@@ -72,127 +69,149 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="space-y-6 lg:col-span-2">
             <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
               <h2 className="text-lg font-semibold text-foreground">
-                Follow the money
+                Published amounts
               </h2>
               <p className="mt-1 text-sm text-muted">
-                Illustrative budget chain (approved → disbursed → spent).
+                Only lines a cited document publishes. Empty rows mean the
+                source does not give a number, not that the amount is zero.
               </p>
               <div className="mt-5">
                 <BudgetBar
-                  approved={project.budgetApproved}
-                  disbursed={project.budgetDisbursed}
-                  spent={project.budgetSpent}
                   currency={project.currency}
                   formatMoney={formatMoney}
+                  rows={[
+                    {
+                      label: project.amountLabel,
+                      value: project.amount,
+                      note: project.amountNote,
+                      color: "bg-sky",
+                    },
+                    {
+                      label: "Co-financing (as published)",
+                      value: project.cofinancing,
+                      note: project.cofinancingNote,
+                      color: "bg-primary",
+                    },
+                    {
+                      label: "Total value (as published)",
+                      value: project.totalValue,
+                      note: project.totalValueNote,
+                      color: "bg-success",
+                    },
+                    {
+                      label: "Disbursed (as published)",
+                      value: project.disbursed,
+                      note: project.disbursedNote,
+                      color: "bg-accent",
+                    },
+                    {
+                      label: "Mauritius-attributed amount",
+                      value: project.mauritiusShare,
+                      note: project.mauritiusShareNote,
+                      color: "bg-primary-dark",
+                    },
+                  ]}
                 />
               </div>
-              <dl className="mt-6 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
-                <div>
-                  <dt className="text-xs font-semibold uppercase text-muted">
-                    Co-financing
-                  </dt>
-                  <dd className="mt-1 font-semibold text-foreground">
-                    {formatMoney(project.cofinancing, project.currency)}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-semibold uppercase text-muted">
-                    Remaining (approx.)
-                  </dt>
-                  <dd className="mt-1 font-semibold text-foreground">
-                    {formatMoney(rem, project.currency)}
-                  </dd>
-                </div>
+              <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <dt className="text-xs font-semibold uppercase text-muted">
                     Start
                   </dt>
                   <dd className="mt-1 font-semibold text-foreground">
-                    {project.startYear ?? "—"}
+                    {project.startYear ?? "Not published"}
                   </dd>
                 </div>
                 <div>
                   <dt className="text-xs font-semibold uppercase text-muted">
-                    End
+                    End / estimated completion
                   </dt>
                   <dd className="mt-1 font-semibold text-foreground">
-                    {project.endYear ?? "—"}
+                    {project.endYear ?? "Not published"}
                   </dd>
                 </div>
               </dl>
             </div>
 
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="text-lg font-semibold text-foreground">
-                Milestones
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {project.milestones.map((m) => (
-                  <li key={m.label} className="flex items-start gap-3 text-sm">
-                    <span
-                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white ${
-                        m.done ? "bg-success" : "bg-muted"
-                      }`}
-                      aria-hidden
-                    >
-                      {m.done ? "✓" : "·"}
-                    </span>
-                    <span
-                      className={
-                        m.done ? "text-foreground" : "text-muted"
-                      }
-                    >
-                      {m.label}
-                      <span className="ml-2 text-xs text-muted">
-                        {m.done ? "Done" : "Pending"}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="text-lg font-semibold text-foreground">Sources</h2>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted">
-                {project.sources.map((s) => (
-                  <li key={s}>
-                    {s.startsWith("http") ? (
+            {project.publishedResults.length > 0 && (
+              <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-foreground">
+                  Results stated by sources
+                </h2>
+                <ul className="mt-4 space-y-3 text-sm text-muted">
+                  {project.publishedResults.map((r) => (
+                    <li key={r.label}>
+                      {r.label}{" "}
                       <a
-                        href={s}
-                        className="text-primary hover:underline"
+                        href={r.sourceUrl}
+                        className="font-semibold text-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {s}
+                        Source
                       </a>
-                    ) : (
-                      s
-                    )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <h2 className="text-lg font-semibold text-foreground">Sources</h2>
+              <ul className="mt-4 space-y-4">
+                {project.sources.map((s) => (
+                  <li key={s.url} className="text-sm">
+                    <a
+                      href={s.url}
+                      className="font-semibold text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {s.title}
+                    </a>
+                    <p className="mt-0.5 text-muted">
+                      {s.publisher} · as of {s.asOf}
+                      {s.notes ? ` · ${s.notes}` : ""}
+                    </p>
                   </li>
                 ))}
               </ul>
+              <p className="mt-4 text-xs text-muted">
+                Confidence: {CONFIDENCE_LABELS[project.confidence]} · Last
+                reviewed {project.lastReviewed}
+              </p>
             </div>
           </div>
 
           <aside className="space-y-4">
             <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                Location
+                Geography
               </h2>
               <p className="mt-2 font-semibold text-foreground">
-                {project.district}
+                {GEOGRAPHY_LABELS[project.geographyScope]}
               </p>
-              <p className="text-sm text-muted">{project.adminUnit}</p>
-              <p className="mt-2 text-xs text-muted">
-                {project.lat.toFixed(4)}, {project.lng.toFixed(4)}
-              </p>
-              <Link
-                href={`/map?focus=${project.id}`}
-                className="mt-3 inline-flex text-sm font-semibold text-primary"
-              >
-                Show on map →
-              </Link>
+              <p className="mt-1 text-sm text-muted">{project.geographyNote}</p>
+              <p className="mt-2 text-sm text-foreground">{project.district}</p>
+              {project.showOnMap && project.lat != null && project.lng != null ? (
+                <>
+                  <p className="mt-2 text-xs text-muted">
+                    Pin {project.lat.toFixed(4)}, {project.lng.toFixed(4)}
+                    {project.pinNote ? ` — ${project.pinNote}` : ""}
+                  </p>
+                  <Link
+                    href={`/map?focus=${project.id}`}
+                    className="mt-3 inline-flex text-sm font-semibold text-primary"
+                  >
+                    Show on map →
+                  </Link>
+                </>
+              ) : (
+                <p className="mt-3 text-xs text-muted">
+                  No map pin: a sourced site coordinate was not published for
+                  this record.
+                </p>
+              )}
             </div>
 
             <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
@@ -222,24 +241,13 @@ export default async function ProjectDetailPage({ params }: Props) {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                Implementing entities
-              </h2>
-              <ul className="mt-2 space-y-1 text-sm text-foreground">
-                {project.implementingEntities.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-            </div>
-
-            {project.contractors.length > 0 && (
+            {project.implementingEntities.length > 0 && (
               <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
                 <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                  Contractors
+                  Implementing entities
                 </h2>
                 <ul className="mt-2 space-y-1 text-sm text-foreground">
-                  {project.contractors.map((f) => (
+                  {project.implementingEntities.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
                 </ul>

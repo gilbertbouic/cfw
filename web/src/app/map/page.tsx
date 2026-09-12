@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { DemoBanner } from "@/components/DemoBanner";
 import { ProjectsMap } from "@/components/ProjectsMap";
-import { getAllProjects } from "@/data/projects";
-import { filterProjects } from "@/lib/projects";
-import type { HazardType, ProjectStatus } from "@/data/types";
+import { SourceBanner } from "@/components/SourceBanner";
+import { getMappableProjects, getProjectById } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Project map",
   description:
-    "Map of demo climate finance projects in Mauritius — status-coloured markers.",
+    "Map pins only for climate-finance records with a sourced site or an explicitly labelled illustrative national centroid.",
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -27,25 +25,22 @@ export default async function MapPage({
   };
 
   const focusId = get("focus");
-  let projects = filterProjects({
-    status: (get("status") as ProjectStatus | "all") || "all",
-    hazard: (get("hazard") as HazardType | "all") || "all",
-  });
-
-  // If focus is set, ensure that project is included and prefer full list if empty
+  let projects = getMappableProjects();
   if (focusId) {
-    const all = getAllProjects();
-    const focused = all.find((p) => p.id === focusId);
-    if (focused && !projects.some((p) => p.id === focusId)) {
+    const focused = getProjectById(focusId);
+    if (
+      focused?.showOnMap &&
+      focused.lat != null &&
+      focused.lng != null &&
+      !projects.some((p) => p.id === focusId)
+    ) {
       projects = [...projects, focused];
     }
   }
 
-  if (projects.length === 0) projects = getAllProjects();
-
   return (
     <>
-      <DemoBanner />
+      <SourceBanner />
       <section className="border-b border-border bg-gradient-to-b from-primary-soft/60 to-background">
         <Container className="py-10 sm:py-12">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -54,12 +49,13 @@ export default async function MapPage({
                 Geo explorer
               </p>
               <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Project map
+                Map of sourced locations
               </h1>
               <p className="mt-3 max-w-2xl text-muted">
-                Click a marker for status and a link to the full project page.
-                Marker colours match lifecycle status (delayed projects use the
-                accent colour).
+                Most climate-finance records are national or multi-country and
+                have no surveyed site. Only {projects.length} record
+                {projects.length === 1 ? "" : "s"} meet the pin rule. Click a
+                marker for the geography caveat.
               </p>
             </div>
             <Link
@@ -74,12 +70,18 @@ export default async function MapPage({
 
       <section className="py-8 sm:py-10">
         <Container>
-          <ProjectsMap projects={projects} />
+          {projects.length === 0 ? (
+            <p className="rounded-2xl border border-dashed border-border bg-card p-8 text-center text-sm text-muted">
+              No sourced coordinates in the current ledger.
+            </p>
+          ) : (
+            <ProjectsMap projects={projects} />
+          )}
           <p className="mt-4 text-center text-xs text-muted">
-            Base map: MapLibre demo tiles · Coordinates are approximate for demo
-            purposes ·{" "}
-            <Link href="/methodology" className="font-semibold text-primary">
-              Methodology
+            Base map: MapLibre demo tiles · Pins are not surveyed works
+            geometries ·{" "}
+            <Link href="/sources" className="font-semibold text-primary">
+              Sources
             </Link>
           </p>
         </Container>

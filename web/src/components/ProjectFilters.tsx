@@ -3,19 +3,20 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 import {
+  GEOGRAPHY_LABELS,
   HAZARD_LABELS,
   OBJECTIVE_LABELS,
   STATUS_LABELS,
+  type GeographyScope,
   type HazardType,
   type ProjectStatus,
 } from "@/data/types";
 
 type Props = {
-  districts: string[];
   funders: string[];
 };
 
-export function ProjectFilters({ districts, funders }: Props) {
+export function ProjectFilters({ funders }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [pending, startTransition] = useTransition();
@@ -70,16 +71,16 @@ export function ProjectFilters({ districts, funders }: Props) {
       </label>
 
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted">
-        District
+        Geography
         <select
           className={`${selectClass} mt-1`}
-          value={searchParams.get("district") ?? "all"}
-          onChange={(e) => update("district", e.target.value)}
+          value={searchParams.get("geography") ?? "all"}
+          onChange={(e) => update("geography", e.target.value)}
         >
-          <option value="all">All districts</option>
-          {districts.map((d) => (
-            <option key={d} value={d}>
-              {d}
+          <option value="all">All geographies</option>
+          {(Object.keys(GEOGRAPHY_LABELS) as GeographyScope[]).map((g) => (
+            <option key={g} value={g}>
+              {GEOGRAPHY_LABELS[g]}
             </option>
           ))}
         </select>

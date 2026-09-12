@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Climate Fund Watch",
   },
   description:
-    "Making every climate adaptation rupee (and dollar) traceable, accountable, and community-verified. Public transparency for climate finance — with a path to integrity-safe reporting.",
+    "Independent, sourced ledger of public climate-finance figures for Mauritius. Every number links to a government or funder document.",
   keywords: [
     "climate finance",
     "transparency",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Climate Fund Watch",
     description:
-      "Climate finance transparency, community verification, and integrity-safe reporting — configurable for any country.",
+      "Sourced climate-finance figures for Mauritius — need, tagged budget, and international projects, each with a public citation.",
     type: "website",
   },
 };

@@ -2,22 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
-import { DemoBanner } from "@/components/DemoBanner";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectFilters } from "@/components/ProjectFilters";
+import { SourceBanner } from "@/components/SourceBanner";
 import { formatMoney } from "@/data/types";
-import type { HazardType, ProjectStatus } from "@/data/types";
+import type { GeographyScope, HazardType, ProjectStatus } from "@/data/types";
 import {
   filterProjects,
   portfolioStats,
-  uniqueDistricts,
   uniqueFunders,
 } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Project registry",
   description:
-    "Browse demo climate finance projects for Mauritius — budgets, status, districts, and funders.",
+    "Sourced climate-finance records for Mauritius — multilateral projects, readiness lines, and regional programmes, each with public citations.",
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -36,19 +35,18 @@ export default async function ProjectsPage({
   const filtered = filterProjects({
     q: get("q"),
     status: (get("status") as ProjectStatus | "all") || "all",
-    district: get("district") || "all",
     hazard: (get("hazard") as HazardType | "all") || "all",
     funder: get("funder") || "all",
     objective: get("objective") || "all",
+    geography: (get("geography") as GeographyScope | "all") || "all",
   });
 
   const stats = portfolioStats(filtered);
-  const districts = uniqueDistricts();
   const funders = uniqueFunders();
 
   return (
     <>
-      <DemoBanner />
+      <SourceBanner />
       <section className="border-b border-border bg-gradient-to-b from-primary-soft/60 to-background">
         <Container className="py-10 sm:py-12">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -57,12 +55,12 @@ export default async function ProjectsPage({
                 Public registry
               </p>
               <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Climate projects
+                Sourced climate-finance records
               </h1>
               <p className="mt-3 max-w-2xl text-muted">
-                Explore curated demo projects for the Mauritius reference tenant.
-                Filter by status, place, hazard, and funder — then open any card
-                for the budget chain and milestones.
+                Only records with at least one public URL. Regional programme
+                totals are not treated as Mauritius receipts. Amounts that
+                funders have not published are shown as “Not published.”
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -83,13 +81,16 @@ export default async function ProjectsPage({
 
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              { label: "Projects shown", value: String(stats.count) },
+              { label: "Records shown", value: String(stats.count) },
               {
-                label: "Approved (sum)",
-                value: formatMoney(stats.approved),
+                label: "Mauritius-attributed USD (sum)",
+                value: formatMoney(stats.attributedSum),
               },
-              { label: "Spent (sum)", value: formatMoney(stats.spent) },
-              { label: "Delayed", value: String(stats.delayed) },
+              {
+                label: "With a Mauritius amount",
+                value: String(stats.attributedCount),
+              },
+              { label: "Multi-country programmes", value: String(stats.regional) },
             ].map((s) => (
               <div
                 key={s.label}
@@ -104,6 +105,12 @@ export default async function ProjectsPage({
               </div>
             ))}
           </div>
+          <p className="mt-3 text-xs text-muted">
+            The Mauritius-attributed USD sum adds only USD amounts a source
+            assigns to Mauritius (GCF FP033 grant, AF coastal grant, AF coral
+            Mauritius component, NDC NAP lines). It omits the EC farmer grant
+            (€) and does not add regional GCF programme totals.
+          </p>
         </Container>
       </section>
 
@@ -114,12 +121,12 @@ export default async function ProjectsPage({
               <div className="h-24 animate-pulse rounded-2xl bg-primary-soft/40" />
             }
           >
-            <ProjectFilters districts={districts} funders={funders} />
+            <ProjectFilters funders={funders} />
           </Suspense>
 
           {filtered.length === 0 ? (
             <p className="rounded-2xl border border-dashed border-border bg-card p-8 text-center text-sm text-muted">
-              No projects match these filters. Clear a filter and try again.
+              No records match these filters. Clear a filter and try again.
             </p>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -135,8 +142,8 @@ export default async function ProjectsPage({
               JSON API
             </a>{" "}
             ·{" "}
-            <Link href="/methodology" className="font-semibold text-primary">
-              Data methodology
+            <Link href="/sources" className="font-semibold text-primary">
+              Sources and methods
             </Link>
           </p>
         </Container>

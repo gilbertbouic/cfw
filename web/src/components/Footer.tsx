@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LEDGER_REVIEWED } from "@/data/types";
 import { Container } from "./Container";
 
 export function Footer() {
@@ -10,9 +11,9 @@ export function Footer() {
             Climate Fund Watch
           </p>
           <p className="mt-2 max-w-md text-sm text-muted">
-            A digital public good for climate finance transparency, community
-            verification, and whistleblower-safe integrity reporting. Built once,
-            configurable for any country. Mauritius is the reference pilot.
+            An independent public ledger of climate-finance figures for
+            Mauritius, compiled from cited government and funder documents.
+            Product modules beyond this sourced registry are proposed, not live.
           </p>
           <p className="mt-3 text-sm">
             <a
@@ -50,23 +51,28 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/landscape" className="hover:text-primary">
+                Funding landscape
+              </Link>
+            </li>
+            <li>
               <Link href="/map" className="hover:text-primary">
                 Map
               </Link>
             </li>
             <li>
+              <Link href="/sources" className="hover:text-primary">
+                Sources
+              </Link>
+            </li>
+            <li>
               <Link href="/about" className="hover:text-primary">
-                About
+                About the product
               </Link>
             </li>
             <li>
               <Link href="/problem-solution" className="hover:text-primary">
-                Problem &amp; Solution
-              </Link>
-            </li>
-            <li>
-              <Link href="/methodology" className="hover:text-primary">
-                Methodology
+                Problem &amp; solution
               </Link>
             </li>
             <li>
@@ -77,13 +83,13 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="text-sm font-semibold text-foreground">Status</p>
+          <p className="text-sm font-semibold text-foreground">Ledger</p>
           <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>Phase B — narrative site</li>
-            <li>Phase C — demo registry &amp; map</li>
+            <li>Last reviewed {LEDGER_REVIEWED}</li>
+            <li>Unknown amounts shown as “Not published”</li>
             <li>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-medium text-accent">
-                Demo data live
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-2 py-0.5 text-xs font-medium text-primary-dark">
+                Sourced records only
               </span>
             </li>
           </ul>
@@ -92,7 +98,7 @@ export function Footer() {
       <div className="border-t border-border">
         <Container className="flex flex-col gap-2 py-4 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Climate Fund Watch. All rights reserved.</p>
-          <p>Open by default for public climate finance. Privacy-first for integrity reports.</p>
+          <p>Not an official government or funder reporting system.</p>
         </Container>
       </div>
     </footer>

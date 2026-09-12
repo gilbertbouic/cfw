@@ -16,7 +16,7 @@ const audiences = [
   },
   {
     title: "Media & researchers",
-    body: "Use open project lists, budget chains, and (soon) machine-readable exports to audit claims independently.",
+    body: "Use the sourced registry, citation pages, and JSON/CSV exports to audit published claims independently.",
   },
   {
     title: "Local authorities",
@@ -106,9 +106,9 @@ export default function AboutPage() {
               Product status
             </p>
             <ul className="mt-3 space-y-2 text-sm text-muted">
-              <li>• Public narrative site (this site) — live in development</li>
-              <li>• Demo registry &amp; map — next build phase</li>
-              <li>• Full MVP modules — planned under product build plan</li>
+              <li>• Sourced Mauritius ledger, landscape, and citations — live</li>
+              <li>• JSON/CSV downloads with source URLs — live</li>
+              <li>• Community evidence, integrity vault, government consoles — proposed, not live</li>
             </ul>
             <Link
               href="/problem-solution"
@@ -183,7 +183,9 @@ export default function AboutPage() {
                 <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
                   Indicative budget
                 </dt>
-                <dd className="mt-1 font-semibold text-foreground">USD 550,000</dd>
+                <dd className="mt-1 font-semibold text-foreground">
+                  USD 550,000 (proposed)
+                </dd>
               </div>
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-muted">

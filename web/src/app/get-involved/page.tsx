@@ -117,7 +117,7 @@ export default function GetInvolvedPage() {
                     >
                       github.com/gilbertbouic/cfw
                     </a>
-                    <span className="text-muted"> (private)</span>
+                    <span className="text-muted"> (public)</span>
                   </li>
                 </ul>
               </div>
@@ -127,13 +127,15 @@ export default function GetInvolvedPage() {
                   Transparency note
                 </p>
                 <p className="mt-2">
-                  Project and budget records on this site are curated demo data
-                  until official data-sharing agreements and live feeds are in
-                  place. See{" "}
-                  <a href="/methodology" className="font-semibold text-primary">
-                    methodology
+                  Project and budget records on this site are compiled from
+                  cited public documents. They are not a live government feed.
+                  See{" "}
+                  <a href="/sources" className="font-semibold text-primary">
+                    sources
                   </a>
-                  .
+                  . The USD 550,000 Year-1 envelope mentioned in concept notes
+                  is a proposed Climate Fund Watch pilot cost, not a Mauritius
+                  climate-finance statistic.
                 </p>
               </div>
             </aside>

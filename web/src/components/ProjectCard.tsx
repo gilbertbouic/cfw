@@ -1,13 +1,17 @@
 import Link from "next/link";
 import type { Project } from "@/data/types";
 import {
+  attributedMauritiusAmount,
   formatMoney,
+  GEOGRAPHY_LABELS,
   HAZARD_LABELS,
   OBJECTIVE_LABELS,
 } from "@/data/types";
 import { StatusBadge } from "./StatusBadge";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const attributed = attributedMauritiusAmount(project);
+
   return (
     <article className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:border-primary/35 hover:shadow-md">
       <div className="flex flex-wrap items-start justify-between gap-2">
@@ -17,10 +21,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </span>
       </div>
       <h2 className="mt-3 text-base font-semibold leading-snug text-foreground">
-        <Link
-          href={`/projects/${project.id}`}
-          className="hover:text-primary"
-        >
+        <Link href={`/projects/${project.id}`} className="hover:text-primary">
           {project.title}
         </Link>
       </h2>
@@ -28,16 +29,20 @@ export function ProjectCard({ project }: { project: Project }) {
       <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
         <div>
           <dt className="font-semibold uppercase tracking-wide text-muted">
-            District
+            Geography
           </dt>
-          <dd className="mt-0.5 text-foreground">{project.district}</dd>
+          <dd className="mt-0.5 text-foreground">
+            {GEOGRAPHY_LABELS[project.geographyScope]}
+          </dd>
         </div>
         <div>
           <dt className="font-semibold uppercase tracking-wide text-muted">
-            Approved
+            {project.geographyScope === "multi_country"
+              ? "Mauritius share"
+              : project.amountLabel}
           </dt>
           <dd className="mt-0.5 text-foreground">
-            {formatMoney(project.budgetApproved, project.currency)}
+            {formatMoney(attributed, project.currency)}
           </dd>
         </div>
       </dl>
@@ -51,11 +56,14 @@ export function ProjectCard({ project }: { project: Project }) {
           </span>
         ))}
       </div>
+      <p className="mt-3 text-[11px] text-muted">
+        {project.sources.length} source{project.sources.length === 1 ? "" : "s"}
+      </p>
       <Link
         href={`/projects/${project.id}`}
-        className="mt-4 text-sm font-semibold text-primary hover:text-primary-dark"
+        className="mt-3 text-sm font-semibold text-primary hover:text-primary-dark"
       >
-        View project →
+        View record and sources →
       </Link>
     </article>
   );
