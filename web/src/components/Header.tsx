@@ -9,7 +9,7 @@ const nav = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Registry" },
   { href: "/landscape", label: "Landscape" },
-  { href: "/map", label: "Spend map" },
+  { href: "/map", label: "Places" },
   { href: "/reports", label: "Reports" },
   { href: "/sources", label: "Sources" },
   { href: "/about", label: "About" },

@@ -57,7 +57,7 @@ export function Footer() {
             </li>
             <li>
               <Link href="/map" className="hover:text-primary">
-                Map
+                Places
               </Link>
             </li>
             <li>

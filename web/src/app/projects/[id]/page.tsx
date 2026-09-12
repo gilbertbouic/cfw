@@ -325,7 +325,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                   href="/map"
                   className="mt-3 inline-flex text-sm font-semibold text-primary"
                 >
-                  Show named places on map →
+                  Show named places →
                 </Link>
               ) : (
                 <p className="mt-3 text-xs text-muted">

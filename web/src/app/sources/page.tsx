@@ -55,12 +55,12 @@ export default function SourcesPage() {
               projects delayed for illustration.
             </li>
             <li>
-              Map pins are named localities from CEB, UNDP, GCF or Adaptation
-              Fund reports (battery substations, three AF coastal sites,
-              island-level PV). Pins are approximate localities, not surveyed
-              works polygons. Site-level spend is “Not reported” unless a
-              document publishes a figure for that site. Batch grants are not
-              divided across substations.
+              Named works sites are shown on a Mauritius/Rodrigues schematic
+              (not a world map). Dots are approximate localities from CEB,
+              UNDP, GCF or Adaptation Fund reports, not surveyed works
+              polygons. Site-level spend is “Not reported” unless a document
+              publishes a figure for that site. Batch grants are not divided
+              across substations.
             </li>
             <li>
               Donor reports are APRs, PPRs and evaluations linked from GCF or

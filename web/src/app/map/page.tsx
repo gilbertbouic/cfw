@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { ProjectsMap } from "@/components/ProjectsMap";
+import { WorksSchematic } from "@/components/WorksSchematic";
 import { SourceBanner } from "@/components/SourceBanner";
 import { getAllProjects } from "@/data/projects";
 import {
@@ -32,15 +32,15 @@ export default function MapPage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                Spend geography
+                Places
               </p>
               <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 Where public reports name a place
               </h1>
               <p className="mt-3 max-w-2xl text-muted">
-                Pins are localities named in CEB, UNDP, GCF or Adaptation Fund
-                documents. Site-level rupees or dollars are almost never
-                published — those lines say{" "}
+                A schematic of Mauritius and Rodrigues — not a world map — with
+                localities named in CEB, UNDP, GCF or Adaptation Fund documents.
+                Site-level spend is almost never published, so those lines say{" "}
                 <strong className="font-semibold text-foreground">
                   not reported
                 </strong>
@@ -59,10 +59,9 @@ export default function MapPage() {
 
       <section className="py-8 sm:py-10">
         <Container className="space-y-10">
-          <ProjectsMap places={places} />
+          <WorksSchematic places={places} />
           <p className="text-center text-xs text-muted">
-            Basemap: OpenFreeMap (OpenStreetMap data) · {onMap.length} places
-            in the Mauritius–Rodrigues frame
+            {onMap.length} places on the island figures · no tile server
           </p>
 
           <div>
