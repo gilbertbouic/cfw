@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LEDGER_REVIEWED } from "@/data/types";
 import { Container } from "./Container";
+import { MkweliLockup } from "./MkweliLockup";
 
 export function Footer() {
   return (
@@ -24,22 +25,7 @@ export function Footer() {
             </a>
           </p>
           <p className="mt-4">
-            <a
-              href="https://mkweli.tech"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark"
-            >
-              <img
-                src="/brand/mkweli-logo.png"
-                alt="Mkweli"
-                className="h-6 w-auto dark:hidden"
-              />
-              <img
-                src="/brand/mkweli-logo-on-dark.png"
-                alt="Mkweli"
-                className="hidden h-6 w-auto dark:block"
-              />
-              <span>A Mkweli product</span>
-            </a>
+            <MkweliLockup size="md" className="text-sm font-semibold" />
           </p>
         </div>
         <div>

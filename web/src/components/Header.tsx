@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Container } from "./Container";
+import { MkweliLockup } from "./MkweliLockup";
 
 const nav = [
   { href: "/", label: "Home" },
@@ -36,9 +37,7 @@ export function Header() {
               Back to <span className="font-semibold">mkweli.tech</span>
             </span>
           </a>
-          <span className="hidden text-muted sm:inline">
-            A Mkweli product
-          </span>
+          <MkweliLockup className="text-xs sm:text-sm" />
         </Container>
       </div>
 

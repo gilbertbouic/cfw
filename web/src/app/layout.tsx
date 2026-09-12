@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     "accountability",
     "open data",
   ],
+  icons: {
+    icon: "/brand/mkweli-favicon.ico",
+  },
   openGraph: {
     title: "Climate Fund Watch",
     description:
