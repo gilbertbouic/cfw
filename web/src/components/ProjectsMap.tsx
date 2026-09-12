@@ -9,15 +9,22 @@ import {
   Popup,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import type { Project } from "@/data/types";
-import { STATUS_COLORS, STATUS_LABELS } from "@/data/types";
+import type { SpendPlace } from "@/data/types";
+import { ISLAND_LABELS } from "@/data/types";
+
+const OPENFREEMAP = "https://tiles.openfreemap.org/styles/positron";
+
+const PRECISION_COLOR: Record<SpendPlace["precision"], string> = {
+  locality: "#0d6e5f",
+  island: "#1f6f8b",
+};
 
 type Props = {
-  projects: Project[];
+  places: SpendPlace[];
   className?: string;
 };
 
-export function ProjectsMap({ projects, className = "" }: Props) {
+export function ProjectsMap({ places, className = "" }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
 
@@ -26,9 +33,9 @@ export function ProjectsMap({ projects, className = "" }: Props) {
 
     const map = new Map({
       container: containerRef.current,
-      style: "https://demotiles.maplibre.org/style.json",
-      center: [57.55, -20.25],
-      zoom: 8.2,
+      style: OPENFREEMAP,
+      center: [57.55, -20.28],
+      zoom: 9,
       attributionControl: { compact: true },
     });
 
@@ -54,35 +61,45 @@ export function ProjectsMap({ projects, className = "" }: Props) {
       markers.forEach((m) => m.remove());
       markers.length = 0;
 
-      for (const p of projects) {
+      const visible = places.filter((p) => p.includeInDefaultView);
+
+      for (const p of visible) {
+        const color = PRECISION_COLOR[p.precision];
+        const size = p.precision === "island" ? 22 : 18;
         const el = document.createElement("button");
         el.type = "button";
         el.className = "cfw-map-marker";
         el.style.cssText = [
-          "width:16px",
-          "height:16px",
+          `width:${size}px`,
+          `height:${size}px`,
           "border-radius:9999px",
-          `background:${STATUS_COLORS[p.status]}`,
+          `background:${color}`,
           "border:2px solid #fff",
-          "box-shadow:0 1px 4px rgba(0,0,0,.35)",
+          "box-shadow:0 1px 4px rgba(0,0,0,.4)",
           "cursor:pointer",
           "padding:0",
         ].join(";");
-        el.setAttribute("aria-label", p.title);
+        el.setAttribute("aria-label", p.name);
+
+        const spendLine =
+          p.spendAmount == null
+            ? "Site-level spend: not reported"
+            : `${p.spendAmount} ${p.spendCurrency}`;
 
         const popup = new Popup({
-          offset: 12,
-          maxWidth: "280px",
+          offset: 14,
+          maxWidth: "300px",
         }).setHTML(
           `<div style="font-family:system-ui,sans-serif;font-size:13px;line-height:1.4">
-            <div style="font-weight:700;margin-bottom:4px">${escapeHtml(p.title)}</div>
-            <div style="color:#5b6b66;margin-bottom:6px">${STATUS_LABELS[p.status]} · ${escapeHtml(p.district)}</div>
-            ${p.pinNote ? `<div style="color:#5b6b66;margin-bottom:6px;font-size:12px">${escapeHtml(p.pinNote)}</div>` : ""}
-            <a href="/projects/${encodeURIComponent(p.id)}" style="color:#0d6e5f;font-weight:600;text-decoration:none">Open record →</a>
+            <div style="font-weight:700;margin-bottom:4px">${escapeHtml(p.name)}</div>
+            <div style="color:#5b6b66;margin-bottom:6px">${escapeHtml(ISLAND_LABELS[p.island])} · ${p.precision === "island" ? "Island-level" : "Named locality"}</div>
+            <div style="margin-bottom:6px">${escapeHtml(p.worksNote)}</div>
+            <div style="font-weight:600;margin-bottom:4px">${escapeHtml(spendLine)}</div>
+            <div style="color:#5b6b66;font-size:12px;margin-bottom:8px">${escapeHtml(p.spendNote)}</div>
+            <a href="/projects/${encodeURIComponent(p.projectId)}" style="color:#0d6e5f;font-weight:600;text-decoration:none">Open record →</a>
           </div>`,
         );
 
-        if (p.lng == null || p.lat == null) continue;
         const marker = new Marker({ element: el })
           .setLngLat([p.lng, p.lat])
           .setPopup(popup)
@@ -90,14 +107,10 @@ export function ProjectsMap({ projects, className = "" }: Props) {
         markers.push(marker);
       }
 
-      const located = projects.filter(
-        (p): p is typeof p & { lat: number; lng: number } =>
-          p.lat != null && p.lng != null,
-      );
-      if (located.length > 0) {
+      if (visible.length > 0) {
         const bounds = new LngLatBounds();
-        located.forEach((p) => bounds.extend([p.lng, p.lat]));
-        map.fitBounds(bounds, { padding: 48, maxZoom: 10, duration: 600 });
+        visible.forEach((p) => bounds.extend([p.lng, p.lat]));
+        map.fitBounds(bounds, { padding: 56, maxZoom: 9.5, duration: 600 });
       }
     };
 
@@ -107,25 +120,29 @@ export function ProjectsMap({ projects, className = "" }: Props) {
     return () => {
       markers.forEach((m) => m.remove());
     };
-  }, [projects]);
+  }, [places]);
 
   return (
     <div
       className={`overflow-hidden rounded-2xl border border-border bg-card shadow-sm ${className}`}
     >
-      <div ref={containerRef} className="h-[420px] w-full sm:h-[520px]" />
-      <div className="flex flex-wrap gap-3 border-t border-border px-4 py-3 text-xs text-muted">
-        {(Object.keys(STATUS_COLORS) as (keyof typeof STATUS_COLORS)[]).map(
-          (s) => (
-            <span key={s} className="inline-flex items-center gap-1.5">
-              <span
-                className="h-2.5 w-2.5 rounded-full"
-                style={{ background: STATUS_COLORS[s] }}
-              />
-              {STATUS_LABELS[s]}
-            </span>
-          ),
-        )}
+      <div ref={containerRef} className="h-[420px] w-full sm:h-[560px]" />
+      <div className="flex flex-wrap gap-4 border-t border-border px-4 py-3 text-xs text-muted">
+        <span className="inline-flex items-center gap-1.5">
+          <span
+            className="h-3 w-3 rounded-full"
+            style={{ background: PRECISION_COLOR.locality }}
+          />
+          Named locality (works reported)
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span
+            className="h-3 w-3 rounded-full"
+            style={{ background: PRECISION_COLOR.island }}
+          />
+          Island-level (amount not split)
+        </span>
+        <span>Agaléga is listed below — off this map frame.</span>
       </div>
     </div>
   );

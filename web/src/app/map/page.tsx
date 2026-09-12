@@ -3,40 +3,26 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ProjectsMap } from "@/components/ProjectsMap";
 import { SourceBanner } from "@/components/SourceBanner";
-import { getMappableProjects, getProjectById } from "@/data/projects";
+import { getAllProjects } from "@/data/projects";
+import {
+  getSpendPlaces,
+  projectsWithoutSpendPlaces,
+} from "@/data/spend-places";
+import { ISLAND_LABELS, PIN_CAVEAT } from "@/data/types";
 
 export const metadata: Metadata = {
-  title: "Project map",
+  title: "Where works were reported",
   description:
-    "Map pins only for climate-finance records with a sourced site or an explicitly labelled illustrative national centroid.",
+    "Named places in public climate-finance reports for Mauritius, with site-level spend or not reported.",
 };
 
-type SearchParams = Promise<Record<string, string | string[] | undefined>>;
-
-export default async function MapPage({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
-  const sp = await searchParams;
-  const get = (k: string) => {
-    const v = sp[k];
-    return Array.isArray(v) ? v[0] : v;
-  };
-
-  const focusId = get("focus");
-  let projects = getMappableProjects();
-  if (focusId) {
-    const focused = getProjectById(focusId);
-    if (
-      focused?.showOnMap &&
-      focused.lat != null &&
-      focused.lng != null &&
-      !projects.some((p) => p.id === focusId)
-    ) {
-      projects = [...projects, focused];
-    }
-  }
+export default function MapPage() {
+  const places = getSpendPlaces();
+  const onMap = places.filter((p) => p.includeInDefaultView);
+  const offFrame = places.filter((p) => !p.includeInDefaultView);
+  const withoutSites = projectsWithoutSpendPlaces();
+  const projects = getAllProjects();
+  const titleById = Object.fromEntries(projects.map((p) => [p.id, p.title]));
 
   return (
     <>
@@ -46,16 +32,19 @@ export default async function MapPage({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                Geo explorer
+                Spend geography
               </p>
               <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Map of sourced locations
+                Where public reports name a place
               </h1>
               <p className="mt-3 max-w-2xl text-muted">
-                Most climate-finance records are national or multi-country and
-                have no surveyed site. Only {projects.length} record
-                {projects.length === 1 ? "" : "s"} meet the pin rule. Click a
-                marker for the geography caveat.
+                Pins are localities named in CEB, UNDP, GCF or Adaptation Fund
+                documents. Site-level rupees or dollars are almost never
+                published — those lines say{" "}
+                <strong className="font-semibold text-foreground">
+                  not reported
+                </strong>
+                . {PIN_CAVEAT}
               </p>
             </div>
             <Link
@@ -69,20 +58,115 @@ export default async function MapPage({
       </section>
 
       <section className="py-8 sm:py-10">
-        <Container>
-          {projects.length === 0 ? (
-            <p className="rounded-2xl border border-dashed border-border bg-card p-8 text-center text-sm text-muted">
-              No sourced coordinates in the current ledger.
+        <Container className="space-y-10">
+          <ProjectsMap places={places} />
+          <p className="text-center text-xs text-muted">
+            Basemap: OpenFreeMap (OpenStreetMap data) · {onMap.length} places
+            in the Mauritius–Rodrigues frame
+          </p>
+
+          <div>
+            <h2 className="font-display text-xl font-semibold text-foreground">
+              Named in reports
+            </h2>
+            <p className="mt-2 text-sm text-muted">
+              Works or activity reported at these places. A batch grant (for
+              example USD 7.5 million for 14 MW of batteries) is not divided
+              across substations.
             </p>
-          ) : (
-            <ProjectsMap projects={projects} />
-          )}
-          <p className="mt-4 text-center text-xs text-muted">
-            Base map: MapLibre demo tiles · Pins are not surveyed works
-            geometries ·{" "}
-            <Link href="/sources" className="font-semibold text-primary">
-              Sources
-            </Link>
+            <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
+              <table className="w-full text-left text-sm">
+                <thead className="border-b border-border bg-primary-soft/40 text-xs uppercase tracking-wide text-muted">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Place</th>
+                    <th className="hidden px-4 py-3 font-semibold sm:table-cell">
+                      Island
+                    </th>
+                    <th className="px-4 py-3 font-semibold">Site-level spend</th>
+                    <th className="hidden px-4 py-3 font-semibold md:table-cell">
+                      Source
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {places.map((p) => (
+                    <tr
+                      key={p.id}
+                      className="border-b border-border last:border-0"
+                    >
+                      <td className="px-4 py-3">
+                        <Link
+                          href={`/projects/${p.projectId}`}
+                          className="font-semibold text-foreground hover:text-primary"
+                        >
+                          {p.name}
+                        </Link>
+                        <p className="mt-1 text-xs text-muted">{p.worksNote}</p>
+                      </td>
+                      <td className="hidden px-4 py-3 text-muted sm:table-cell">
+                        {ISLAND_LABELS[p.island]}
+                        {!p.includeInDefaultView ? " · off map frame" : ""}
+                      </td>
+                      <td className="px-4 py-3 font-medium text-foreground">
+                        {p.spendAmount == null
+                          ? "Not reported"
+                          : `${p.spendCurrency} ${p.spendAmount.toLocaleString("en")}`}
+                      </td>
+                      <td className="hidden px-4 py-3 md:table-cell">
+                        <a
+                          href={p.sourceUrl}
+                          className="text-xs font-semibold text-primary hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {p.sourcePublisher} →
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {offFrame.length > 0 && (
+              <p className="mt-3 text-xs text-muted">
+                Off this map frame:{" "}
+                {offFrame.map((p) => p.name).join("; ")}.
+              </p>
+            )}
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl font-semibold text-foreground">
+              Site-level spend not reported
+            </h2>
+            <p className="mt-2 text-sm text-muted">
+              These ledger records have no named works site in the documents
+              reviewed. Money may still have been approved or disbursed to an
+              implementer — see the project page.
+            </p>
+            <ul className="mt-4 divide-y divide-border rounded-2xl border border-border bg-card shadow-sm">
+              {withoutSites.map((p) => (
+                <li
+                  key={p.id}
+                  className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <Link
+                    href={`/projects/${p.id}`}
+                    className="font-semibold text-foreground hover:text-primary"
+                  >
+                    {p.title}
+                  </Link>
+                  <span className="text-sm text-muted">
+                    Not reported at site
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="text-xs text-muted">
+            Linked records:{" "}
+            {[...new Set(places.map((p) => titleById[p.projectId]))].join(" · ")}
           </p>
         </Container>
       </section>

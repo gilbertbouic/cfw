@@ -44,7 +44,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/projects` | Sourced registry |
 | `/projects/[id]` | Record detail with citations |
 | `/landscape` | Need vs tagged spend vs donor channels |
-| `/map` | Pins only where a sourced location exists |
+| `/map` | Named works sites from reports; site-level spend or not reported |
 | `/sources` | Methods and source list (`/methodology` redirects here) |
 | `/api/projects` | JSON (includes source URLs) |
 | `/api/projects.csv` | CSV download |

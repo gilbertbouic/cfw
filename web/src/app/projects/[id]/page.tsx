@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import { SourceBanner } from "@/components/SourceBanner";
 import { StatusBadge } from "@/components/StatusBadge";
 import { getAllProjects, getProjectById } from "@/data/projects";
+import { getSpendPlacesForProject } from "@/data/spend-places";
 import {
   CONFIDENCE_LABELS,
   formatMoney,
@@ -35,6 +36,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const { id } = await params;
   const project = getProjectById(id);
   if (!project) notFound();
+  const spendPlaces = getSpendPlacesForProject(project.id);
 
   return (
     <>
@@ -133,6 +135,79 @@ export default async function ProjectDetailPage({ params }: Props) {
               </dl>
             </div>
 
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <h2 className="text-lg font-semibold text-foreground">
+                Where the money went
+              </h2>
+              <p className="mt-1 text-sm text-muted">
+                Disbursement to an accredited entity is not the same as
+                expenditure at a named site. Site-level rupees or dollars are
+                shown only when a cited report publishes them.
+              </p>
+              <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                <div>
+                  <dt className="text-xs font-semibold uppercase text-muted">
+                    Disbursed to implementer
+                  </dt>
+                  <dd className="mt-1 font-semibold text-foreground">
+                    {formatMoney(project.disbursed, project.currency)}
+                  </dd>
+                  {project.disbursedNote && (
+                    <p className="mt-1 text-xs text-muted">
+                      {project.disbursedNote}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase text-muted">
+                    Named works sites
+                  </dt>
+                  <dd className="mt-1 font-semibold text-foreground">
+                    {spendPlaces.length > 0
+                      ? `${spendPlaces.length} place${spendPlaces.length === 1 ? "" : "s"} in public reports`
+                      : "Not reported"}
+                  </dd>
+                </div>
+              </dl>
+              {spendPlaces.length > 0 ? (
+                <ul className="mt-4 space-y-3 border-t border-border pt-4">
+                  {spendPlaces.map((place) => (
+                    <li key={place.id} className="text-sm">
+                      <p className="font-semibold text-foreground">
+                        {place.name}
+                      </p>
+                      <p className="mt-0.5 text-muted">{place.worksNote}</p>
+                      <p className="mt-1 text-xs font-medium text-foreground">
+                        Site-level spend:{" "}
+                        {place.spendAmount == null
+                          ? "Not reported"
+                          : formatMoney(place.spendAmount, place.spendCurrency)}
+                      </p>
+                      <a
+                        href={place.sourceUrl}
+                        className="mt-1 inline-flex text-xs font-semibold text-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {place.sourceTitle} →
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 text-sm text-muted">
+                  No named works site was found in the documents reviewed for
+                  this record.
+                </p>
+              )}
+              <Link
+                href="/map"
+                className="mt-4 inline-flex text-sm font-semibold text-primary"
+              >
+                Open spend geography map →
+              </Link>
+            </div>
+
             {project.publishedResults.length > 0 && (
               <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
                 <h2 className="text-lg font-semibold text-foreground">
@@ -193,23 +268,16 @@ export default async function ProjectDetailPage({ params }: Props) {
               </p>
               <p className="mt-1 text-sm text-muted">{project.geographyNote}</p>
               <p className="mt-2 text-sm text-foreground">{project.district}</p>
-              {project.showOnMap && project.lat != null && project.lng != null ? (
-                <>
-                  <p className="mt-2 text-xs text-muted">
-                    Pin {project.lat.toFixed(4)}, {project.lng.toFixed(4)}
-                    {project.pinNote ? ` — ${project.pinNote}` : ""}
-                  </p>
-                  <Link
-                    href={`/map?focus=${project.id}`}
-                    className="mt-3 inline-flex text-sm font-semibold text-primary"
-                  >
-                    Show on map →
-                  </Link>
-                </>
+              {spendPlaces.length > 0 ? (
+                <Link
+                  href="/map"
+                  className="mt-3 inline-flex text-sm font-semibold text-primary"
+                >
+                  Show named places on map →
+                </Link>
               ) : (
                 <p className="mt-3 text-xs text-muted">
-                  No map pin: a sourced site coordinate was not published for
-                  this record.
+                  No named works site in the documents reviewed — not pinned.
                 </p>
               )}
             </div>

@@ -44,6 +44,41 @@ export type PublishedResult = {
   sourceUrl: string;
 };
 
+export type PlacePrecision = "locality" | "island";
+
+export type SpendPlace = {
+  id: string;
+  projectId: string;
+  name: string;
+  island: "mauritius" | "rodrigues" | "agalega";
+  lat: number;
+  lng: number;
+  includeInDefaultView: boolean;
+  precision: PlacePrecision;
+  worksNote: string;
+  spendAmount: number | null;
+  spendCurrency: string;
+  spendNote: string;
+  sourceUrl: string;
+  sourceTitle: string;
+  sourcePublisher: string;
+  asOf: string;
+};
+
+export const ISLAND_LABELS: Record<SpendPlace["island"], string> = {
+  mauritius: "Mauritius",
+  rodrigues: "Rodrigues",
+  agalega: "Agaléga",
+};
+
+export const PRECISION_LABELS: Record<PlacePrecision, string> = {
+  locality: "Named locality",
+  island: "Island-level",
+};
+
+export const PIN_CAVEAT =
+  "Approximate locality for a place named in a public report — not a surveyed works polygon.";
+
 export type Project = {
   id: string;
   title: string;

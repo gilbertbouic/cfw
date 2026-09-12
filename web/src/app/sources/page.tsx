@@ -55,8 +55,12 @@ export default function SourcesPage() {
               projects delayed for illustration.
             </li>
             <li>
-              Map pins are used only with a named site or an explicit
-              “illustrative national centroid” note.
+              Map pins are named localities from CEB, UNDP, GCF or Adaptation
+              Fund reports (battery substations, three AF coastal sites,
+              island-level PV). Pins are approximate localities, not surveyed
+              works polygons. Site-level spend is “Not reported” unless a
+              document publishes a figure for that site. Batch grants are not
+              divided across substations.
             </li>
           </ul>
 

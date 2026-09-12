@@ -29,3 +29,12 @@ See each `/projects/[id]` page. Canonical funder pages:
 - [AF coastal zone](https://www.adaptation-fund.org/project/climate-change-adaptation-programme-in-the-coastal-zone-of-mauritius/)
 - [AF coral (Mauritius and Seychelles)](https://www.adaptation-fund.org/project/restoring-marine-ecosystem-services-restoring-coral-reefs-meet-changing-climate-future-mauritius-seychelles/)
 - [Commonwealth farmer grant](https://thecommonwealth.org/news/commonwealth-support-secures-grant-help-mauritian-farmers-adapt-changing-climate)
+
+## Map / named works sites
+
+Pins are approximate localities for places **named** in reports. Site-level spend is unpublished unless noted.
+
+- [CEB BESS](https://ceb.mu/projects/battery-energy-storage-system) — Amaury, Henrietta, La Tour Koenig, Anahita, Wooton, Jin Fei; Pointe Monnier (Rodrigues)
+- [UNDP 14 MW BESS inauguration](https://www.undp.org/mauritius-seychelles/news/undp-supports-installation-14-mw-grid-scale-battery-energy-storage-system)
+- [GCF FP033 2018 APR](https://www.greenclimate.fund/sites/default/files/document/fp033-2018apr.pdf) — 4 MW contract USD 2,554,170.51 at Amaury and Henrietta
+- [Quatre Soeurs Refuge Centre](https://www.undp.org/mauritius-seychelles/news/inauguration-quatre-soeurs-refuge-centre)
