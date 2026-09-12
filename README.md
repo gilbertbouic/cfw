@@ -45,6 +45,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/projects/[id]` | Record detail with citations |
 | `/landscape` | Need vs tagged spend vs donor channels |
 | `/map` | Named works sites from reports; site-level spend or not reported |
+| `/reports` | Published donor APRs, PPRs and evaluations |
 | `/sources` | Methods and source list (`/methodology` redirects here) |
 | `/api/projects` | JSON (includes source URLs) |
 | `/api/projects.csv` | CSV download |

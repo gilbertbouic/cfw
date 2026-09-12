@@ -61,6 +61,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/reports" className="hover:text-primary">
+                Donor reports
+              </Link>
+            </li>
+            <li>
               <Link href="/sources" className="hover:text-primary">
                 Sources
               </Link>

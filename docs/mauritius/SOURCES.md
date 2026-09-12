@@ -38,3 +38,7 @@ Pins are approximate localities for places **named** in reports. Site-level spen
 - [UNDP 14 MW BESS inauguration](https://www.undp.org/mauritius-seychelles/news/undp-supports-installation-14-mw-grid-scale-battery-energy-storage-system)
 - [GCF FP033 2018 APR](https://www.greenclimate.fund/sites/default/files/document/fp033-2018apr.pdf) — 4 MW contract USD 2,554,170.51 at Amaury and Henrietta
 - [Quatre Soeurs Refuge Centre](https://www.undp.org/mauritius-seychelles/news/inauguration-quatre-soeurs-refuge-centre)
+
+## Donor reports
+
+Public APRs and evaluations are listed from GCF document pages (FP033, FP135, FP161, FP095). Adaptation Fund PPRs live on the AF project pages (library links, not assumed quarterly). See `web/src/data/reports.ts`.

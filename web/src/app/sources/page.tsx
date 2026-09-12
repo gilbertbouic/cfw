@@ -62,6 +62,12 @@ export default function SourcesPage() {
               document publishes a figure for that site. Batch grants are not
               divided across substations.
             </li>
+            <li>
+              Donor reports are APRs, PPRs and evaluations linked from GCF or
+              Adaptation Fund pages. GCF public reporting for these projects is
+              annual. We do not add a quarterly “next tranche” calendar unless
+              a cited document states that cycle.
+            </li>
           </ul>
 
           <h2 className="mt-10 font-display text-xl font-semibold text-foreground">

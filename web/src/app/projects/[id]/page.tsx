@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import { SourceBanner } from "@/components/SourceBanner";
 import { StatusBadge } from "@/components/StatusBadge";
 import { getAllProjects, getProjectById } from "@/data/projects";
+import { getReportsForProject, REPORT_TYPE_LABELS } from "@/data/reports";
 import { getSpendPlacesForProject } from "@/data/spend-places";
 import {
   CONFIDENCE_LABELS,
@@ -37,6 +38,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const project = getProjectById(id);
   if (!project) notFound();
   const spendPlaces = getSpendPlacesForProject(project.id);
+  const reports = getReportsForProject(project.id);
 
   return (
     <>
@@ -205,6 +207,56 @@ export default async function ProjectDetailPage({ params }: Props) {
                 className="mt-4 inline-flex text-sm font-semibold text-primary"
               >
                 Open spend geography map →
+              </Link>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <h2 className="text-lg font-semibold text-foreground">
+                Donor reports
+              </h2>
+              <p className="mt-1 text-sm text-muted">
+                Public performance reports linked from the funder. GCF reporting
+                for these projects is annual (APR), not a quarterly calendar
+                unless a document says so. A missing year means it was not on
+                the funder site we reviewed — not that we marked it overdue.
+              </p>
+              {reports.length > 0 ? (
+                <ul className="mt-4 space-y-3">
+                  {reports.map((r) => (
+                    <li key={r.id} className="text-sm">
+                      <a
+                        href={r.url}
+                        className="font-semibold text-primary hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {r.title}
+                      </a>
+                      <p className="mt-0.5 text-muted">
+                        {REPORT_TYPE_LABELS[r.type]}
+                        {r.reportingPeriod ? ` · ${r.reportingPeriod}` : ""}
+                        {r.coverDate ? ` · cover ${r.coverDate}` : ""}
+                        {` · ${r.publisher}`}
+                      </p>
+                      {r.geographyNote && (
+                        <p className="mt-0.5 text-xs text-muted">
+                          {r.geographyNote}
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 text-sm text-muted">
+                  No public APR, PPR or evaluation was listed on the funder
+                  pages reviewed for this record.
+                </p>
+              )}
+              <Link
+                href="/reports"
+                className="mt-4 inline-flex text-sm font-semibold text-primary"
+              >
+                All published reports →
               </Link>
             </div>
 

@@ -10,6 +10,7 @@ const nav = [
   { href: "/projects", label: "Registry" },
   { href: "/landscape", label: "Landscape" },
   { href: "/map", label: "Spend map" },
+  { href: "/reports", label: "Reports" },
   { href: "/sources", label: "Sources" },
   { href: "/about", label: "About" },
   { href: "/get-involved", label: "Get involved" },
