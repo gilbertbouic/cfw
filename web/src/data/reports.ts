@@ -183,6 +183,18 @@ export const donorReports: DonorReport[] = [
     publisher: "Green Climate Fund / AFD",
     geographyNote: "Programme-level (17 countries). Not a Mauritius-only report.",
   },
+  {
+    id: "resislands-proposal-2024",
+    projectId: "mu-gcf-resislands",
+    title: "Approved GCF readiness proposal — RESIslands Project",
+    type: "library",
+    reportingPeriod: null,
+    coverDate: "2024-03-30",
+    url: "https://www.greenclimate.fund/sites/default/files/document/20240330-multicountry-uneca.pdf",
+    publisher: "Green Climate Fund / UNECA",
+    geographyNote:
+      "Multi-country AISCC readiness. Mauritius country line USD 250,000 in the requested-amount table.",
+  },
 ];
 
 export function getReportsForProject(projectId: string): DonorReport[] {

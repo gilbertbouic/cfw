@@ -461,6 +461,84 @@ export const projects: Project[] = [
     confidence: "official_register",
   },
   {
+    id: "mu-gcf-resislands",
+    title:
+      "RESIslands — AISCC climate-risk and resilience readiness (GCF)",
+    summary:
+      "GCF Readiness and Preparatory Support Programme grant delivered by UNECA with the African Island States Climate Commission (AISCC). The approved proposal requests USD 4,943,086 for nine African island states, of which USD 250,000 is the Mauritius country line. Cabinet noted a Mauritius national launch on 25 September 2026 at the United Docks, Port Louis.",
+    kind: "readiness",
+    climateObjective: "adaptation",
+    hazards: ["multi", "coastal", "cyclone", "flood"],
+    status: "under_implementation",
+    country: "Mauritius",
+    countryCode: "MU",
+    geographyScope: "multi_country",
+    geographyNote:
+      "Nine AISCC member states: Cabo Verde, Comoros, Equatorial Guinea, Guinea-Bissau, Madagascar, Mauritius, São Tomé and Príncipe, Seychelles, and Tanzania (Zanzibar). Madagascar has no country allocation in the March 2024 table. Do not treat the USD 4,943,086 total as Mauritius funding. Cabinet noted a Mauritius launch at the United Docks, Port Louis, on 25 September 2026 — that is an event venue, not a surveyed works site.",
+    adminUnit: "Regional (AISCC)",
+    district: "AISCC member states",
+    lat: null,
+    lng: null,
+    showOnMap: false,
+    funders: ["Green Climate Fund"],
+    implementingEntities: [
+      "United Nations Economic Commission for Africa",
+      "African Island States Climate Commission",
+    ],
+    currency: "USD",
+    amountLabel: "GCF readiness grant (regional)",
+    amount: 4_943_086,
+    amountNote:
+      "GCF approved readiness proposal (cover date 30 March 2024): total requested USD 4,943,086. Cabinet highlights of 11 September 2026 round this as approximately USD 4.95 million.",
+    cofinancing: null,
+    totalValue: 4_943_086,
+    disbursed: null,
+    disbursedNote:
+      "No Mauritius-only disbursement total is published on the GCF proposal or the Cabinet note reviewed.",
+    mauritiusShare: 250_000,
+    mauritiusShareNote:
+      "GCF readiness proposal country table: Mauritius USD 250,000. Cabinet highlights of 11 September 2026 state the same Mauritius share of the grant.",
+    startYear: 2026,
+    endYear: 2027,
+    publishedResults: [
+      {
+        label:
+          "Cabinet (11 September 2026) noted that the RESIsland Project will be launched on 25 September 2026 at the United Docks, Port Louis, and that Mauritius’ share of the GCF readiness grant is USD 250,000. Implementation period stated as 2026/2027.",
+        sourceUrl:
+          "https://pmo.govmu.org/CabinetDecision/2026/Highlights%20of%20Cabinet%20Meeting%20-%20Friday%2011%20September%202026.pdf",
+      },
+    ],
+    sources: [
+      {
+        title:
+          "Approved GCF readiness proposal — RESIslands Project (PDF)",
+        url: "https://www.greenclimate.fund/sites/default/files/document/20240330-multicountry-uneca.pdf",
+        publisher: "Green Climate Fund",
+        asOf: "2024-03-30",
+        notes:
+          "Requested amount USD 4,943,086; Mauritius country line USD 250,000; delivery partner UNECA; duration 30 months.",
+      },
+      {
+        title:
+          "GCF document page — Strengthening the institutional capacities of AISCC member states (RESIslands)",
+        url: "https://www.greenclimate.fund/document/strengthening-institutional-capacities-african-island-states-climate-commission-aiscc",
+        publisher: "Green Climate Fund",
+        asOf: "2024-03-30",
+        notes: "Document type: approved readiness proposal. Cover date 30 March 2024.",
+      },
+      {
+        title: "Highlights of Cabinet Meeting — Friday 11 September 2026",
+        url: "https://pmo.govmu.org/CabinetDecision/2026/Highlights%20of%20Cabinet%20Meeting%20-%20Friday%2011%20September%202026.pdf",
+        publisher: "Prime Minister’s Office, Mauritius",
+        asOf: "2026-09-11",
+        notes:
+          "Point 14: Mauritius launch 25 September 2026 at United Docks, Port Louis; Mauritius share USD 250,000; programme grant described as approximately USD 4.95 million.",
+      },
+    ],
+    lastReviewed: LEDGER_REVIEWED,
+    confidence: "official_register",
+  },
+  {
     id: "mu-gcf-nap-infra",
     title:
       "GCF NAP — infrastructure, bridges, flood-prone areas and coastal zones",
@@ -604,8 +682,8 @@ function assertSourcedLedger(list: Project[]) {
       errors.push(`${p.id}: showOnMap without coordinates`);
     }
     if (p.geographyScope === "multi_country" && p.mauritiusShare != null) {
-      // coral is the exception: AF published a Mauritius component line
-      if (p.id !== "mu-af-coral") {
+      // Country split only when a cited document publishes a Mauritius line
+      if (p.id !== "mu-af-coral" && p.id !== "mu-gcf-resislands") {
         errors.push(`${p.id}: unexpected Mauritius share on multi-country record`);
       }
     }

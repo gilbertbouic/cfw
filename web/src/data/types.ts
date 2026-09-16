@@ -169,7 +169,7 @@ export const CONFIDENCE_LABELS: Record<Confidence, string> = {
   secondary_report: "Secondary public report",
 };
 
-export const LEDGER_REVIEWED = "2026-09-12";
+export const LEDGER_REVIEWED = "2026-09-16";
 
 export function formatMoney(
   amount: number | null | undefined,

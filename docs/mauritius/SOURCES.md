@@ -1,6 +1,6 @@
 # Mauritius climate-finance sources
 
-Public URLs behind the Climate Fund Watch ledger (`web/src/data/`). Last reviewed **2026-09-12**.
+Public URLs behind the Climate Fund Watch ledger (`web/src/data/`). Last reviewed **2026-09-16**.
 
 Rules: copy figures as published; do not invent Mauritius splits of regional programmes; do not treat NDC need, budget tags, and donor receipts as one total.
 
@@ -25,6 +25,9 @@ See each `/projects/[id]` page. Canonical funder pages:
 - [GCF FP095](https://www.greenclimate.fund/project/fp095)
 - [GCF FP099](https://www.greenclimate.fund/project/fp099)
 - [GCF FP223](https://www.greenclimate.fund/project/fp223)
+- [GCF RESIslands approved readiness proposal](https://www.greenclimate.fund/sites/default/files/document/20240330-multicountry-uneca.pdf) — total USD 4,943,086; Mauritius USD 250,000
+- [GCF RESIslands document page](https://www.greenclimate.fund/document/strengthening-institutional-capacities-african-island-states-climate-commission-aiscc)
+- [Cabinet highlights, 11 September 2026](https://pmo.govmu.org/CabinetDecision/2026/Highlights%20of%20Cabinet%20Meeting%20-%20Friday%2011%20September%202026.pdf) — Mauritius launch 25 September 2026; share USD 250,000
 - [GCF Mauritius country page](https://www.greenclimate.fund/countries/mauritius)
 - [AF coastal zone](https://www.adaptation-fund.org/project/climate-change-adaptation-programme-in-the-coastal-zone-of-mauritius/)
 - [AF coral (Mauritius and Seychelles)](https://www.adaptation-fund.org/project/restoring-marine-ecosystem-services-restoring-coral-reefs-meet-changing-climate-future-mauritius-seychelles/)
