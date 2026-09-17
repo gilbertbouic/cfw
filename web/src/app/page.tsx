@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SourceBanner } from "@/components/SourceBanner";
@@ -9,6 +10,11 @@ import {
   GEOGRAPHY_LABELS,
   LEDGER_REVIEWED,
 } from "@/data/types";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { url: "/" },
+};
 
 export default function HomePage() {
   const records = getAllProjects();

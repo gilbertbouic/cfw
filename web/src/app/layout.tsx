@@ -17,6 +17,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cfw.mkweli.tech"),
   title: {
     default: "Climate Fund Watch",
     template: "%s · Climate Fund Watch",
@@ -31,6 +32,10 @@ export const metadata: Metadata = {
     "accountability",
     "open data",
   ],
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: "/brand/mkweli-favicon.ico",
   },
@@ -39,6 +44,8 @@ export const metadata: Metadata = {
     description:
       "Sourced climate-finance figures for Mauritius — need, tagged budget, and international projects, each with a public citation.",
     type: "website",
+    siteName: "Climate Fund Watch",
+    locale: "en_MU",
   },
 };
 

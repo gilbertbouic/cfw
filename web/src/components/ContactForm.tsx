@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const INTERESTS = [
@@ -13,14 +12,8 @@ const INTERESTS = [
   { value: "other", label: "Other" },
 ] as const;
 
-type Props = {
-  /** Where FormSubmit redirects after success */
-  thankYouUrl: string;
-};
-
-export function ContactForm({ thankYouUrl }: Props) {
-  const searchParams = useSearchParams();
-  const sent = searchParams.get("sent") === "1";
+export function ContactForm() {
+  const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   const action = useMemo(
@@ -44,7 +37,7 @@ export function ContactForm({ thankYouUrl }: Props) {
         headers: { Accept: "application/json" },
       });
       if (!res.ok) throw new Error("submit_failed");
-      window.location.href = thankYouUrl;
+      setSent(true);
     } catch {
       // Fallback: open mail client with filled subject/body
       const name = String(data.get("name") || "");

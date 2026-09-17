@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { ContactForm } from "@/components/ContactForm";
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
@@ -8,6 +7,8 @@ export const metadata: Metadata = {
   title: "Get involved",
   description:
     "Partner, pilot, fund, or contribute to Climate Fund Watch. Contact support@mkweli.tech.",
+  alternates: { canonical: "/get-involved" },
+  openGraph: { url: "/get-involved" },
 };
 
 const paths = [
@@ -64,13 +65,7 @@ export default function GetInvolvedPage() {
                 days.
               </p>
               <div className="mt-5">
-                <Suspense
-                  fallback={
-                    <div className="h-80 animate-pulse rounded-2xl bg-primary-soft/40" />
-                  }
-                >
-                  <ContactForm thankYouUrl="/get-involved?sent=1" />
-                </Suspense>
+                <ContactForm />
               </div>
             </div>
 

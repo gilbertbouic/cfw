@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   title: "Project registry",
   description:
     "Sourced climate-finance records for Mauritius — multilateral projects, readiness lines, and regional programmes, each with public citations.",
+  alternates: { canonical: "/projects" },
+  openGraph: { url: "/projects" },
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
