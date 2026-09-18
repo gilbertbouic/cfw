@@ -77,7 +77,7 @@ export const PRECISION_LABELS: Record<PlacePrecision, string> = {
 };
 
 export const PIN_CAVEAT =
-  "Approximate locality for a place named in a public report — not a surveyed works polygon.";
+  "Approximate locality for a place named in a public report - not a surveyed works polygon.";
 
 export type Project = {
   id: string;

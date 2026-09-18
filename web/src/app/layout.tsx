@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { LanguageProvider, SkipToContent } from "@/i18n/LanguageProvider";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Climate Fund Watch",
     description:
-      "Sourced climate-finance figures for Mauritius — need, tagged budget, and international projects, each with a public citation.",
+      "Sourced climate-finance figures for Mauritius - need, tagged budget, and international projects, each with a public citation.",
     type: "website",
     siteName: "Climate Fund Watch",
     locale: "en_MU",
@@ -57,20 +58,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${sourceSans.variable} ${sourceSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:text-white"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <LanguageProvider>
+          <SkipToContent />
+          <Header />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

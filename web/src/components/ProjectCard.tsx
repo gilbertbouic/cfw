@@ -1,15 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import type { Project } from "@/data/types";
-import {
-  attributedMauritiusAmount,
-  formatMoney,
-  GEOGRAPHY_LABELS,
-  HAZARD_LABELS,
-  OBJECTIVE_LABELS,
-} from "@/data/types";
+import { attributedMauritiusAmount } from "@/data/types";
+import { useI18n } from "@/i18n/LanguageProvider";
 import { StatusBadge } from "./StatusBadge";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const { dict, plural, formatMoney } = useI18n();
   const attributed = attributedMauritiusAmount(project);
 
   return (
@@ -17,7 +15,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="flex flex-wrap items-start justify-between gap-2">
         <StatusBadge status={project.status} />
         <span className="text-xs font-medium text-muted">
-          {OBJECTIVE_LABELS[project.climateObjective]}
+          {dict.labels.objective[project.climateObjective]}
         </span>
       </div>
       <h2 className="mt-3 text-base font-semibold leading-snug text-foreground">
@@ -29,16 +27,16 @@ export function ProjectCard({ project }: { project: Project }) {
       <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
         <div>
           <dt className="font-semibold uppercase tracking-wide text-muted">
-            Geography
+            {dict.projectCard.geography}
           </dt>
           <dd className="mt-0.5 text-foreground">
-            {GEOGRAPHY_LABELS[project.geographyScope]}
+            {dict.labels.geography[project.geographyScope]}
           </dd>
         </div>
         <div>
           <dt className="font-semibold uppercase tracking-wide text-muted">
             {project.geographyScope === "multi_country"
-              ? "Mauritius share"
+              ? dict.projectCard.mauritiusShare
               : project.amountLabel}
           </dt>
           <dd className="mt-0.5 text-foreground">
@@ -52,18 +50,22 @@ export function ProjectCard({ project }: { project: Project }) {
             key={h}
             className="rounded-md bg-primary-soft px-2 py-0.5 text-[11px] font-medium text-primary-dark"
           >
-            {HAZARD_LABELS[h]}
+            {dict.labels.hazard[h]}
           </span>
         ))}
       </div>
       <p className="mt-3 text-[11px] text-muted">
-        {project.sources.length} source{project.sources.length === 1 ? "" : "s"}
+        {plural(
+          project.sources.length,
+          dict.projectCard.sourceOne,
+          dict.projectCard.sourceOther,
+        )}
       </p>
       <Link
         href={`/projects/${project.id}`}
         className="mt-3 text-sm font-semibold text-primary hover:text-primary-dark"
       >
-        View record and sources →
+        {dict.projectCard.viewRecord}
       </Link>
     </article>
   );

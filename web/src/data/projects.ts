@@ -47,7 +47,7 @@ export const projects: Project[] = [
     totalValueNote: "GCF project page states total project value USD 191 million.",
     disbursed: 27_347_855,
     disbursedNote:
-      "Sum of seven dated GCF disbursements on the FP033 page (Sep 2017–Dec 2025). GCF also labels the grant 97% disbursed. Expenditure by implementers is not published as a single figure here.",
+      "Sum of seven dated GCF disbursements on the FP033 page (Sep 2017-Dec 2025). GCF also labels the grant 97% disbursed. Expenditure by implementers is not published as a single figure here.",
     mauritiusShare: 28_210_000,
     mauritiusShareNote: "GCF grant is Mauritius-specific. Co-finance is additional.",
     startYear: 2017,
@@ -67,7 +67,7 @@ export const projects: Project[] = [
       },
       {
         label:
-          "UN Mauritius (April 2026) reports more than 3,000 low-income households across Mauritius, Rodrigues and Agaléga received rooftop PV. That figure differs from the UNDP project-page “more than 2,000 families” line — both are published; neither is reconciled here.",
+          "UN Mauritius (April 2026) reports more than 3,000 low-income households across Mauritius, Rodrigues and Agaléga received rooftop PV. That figure differs from the UNDP project-page “more than 2,000 families” line - both are published; neither is reconciled here.",
         sourceUrl:
           "https://mauritius.un.org/en/314358-clean-energy-circular-innovation-mauritius-powers-just-green-transition",
       },
@@ -107,7 +107,7 @@ export const projects: Project[] = [
     district: "Mon Choisy / Rivière des Galets / Quatre Soeurs",
     lat: -20.017,
     lng: 57.558,
-    pinNote: "Mon Choisy — one of three named project sites, not the only location.",
+    pinNote: "Mon Choisy - one of three named project sites, not the only location.",
     showOnMap: true,
     funders: ["Adaptation Fund"],
     implementingEntities: ["UNDP", "Ministry of Environment"],
@@ -217,7 +217,7 @@ export const projects: Project[] = [
   },
   {
     id: "mu-gcf-fp135",
-    title: "Ecosystem-based Adaptation in the Indian Ocean — EBA IO (GCF FP135)",
+    title: "Ecosystem-based Adaptation in the Indian Ocean - EBA IO (GCF FP135)",
     summary:
       "Regional GCF programme (Comoros, Madagascar, Mauritius, Seychelles) implemented with AFD. GCF grant USD 38 million plus USD 11.2 million co-finance. A Mauritius-only allocation is not published on the GCF project page.",
     kind: "multilateral_project",
@@ -463,7 +463,7 @@ export const projects: Project[] = [
   {
     id: "mu-gcf-resislands",
     title:
-      "RESIslands — AISCC climate-risk and resilience readiness (GCF)",
+      "RESIslands - AISCC climate-risk and resilience readiness (GCF)",
     summary:
       "GCF Readiness and Preparatory Support Programme grant delivered by UNECA with the African Island States Climate Commission (AISCC). The approved proposal requests USD 4,943,086 for nine African island states, of which USD 250,000 is the Mauritius country line. Cabinet noted a Mauritius national launch on 25 September 2026 at the United Docks, Port Louis.",
     kind: "readiness",
@@ -474,7 +474,7 @@ export const projects: Project[] = [
     countryCode: "MU",
     geographyScope: "multi_country",
     geographyNote:
-      "Nine AISCC member states: Cabo Verde, Comoros, Equatorial Guinea, Guinea-Bissau, Madagascar, Mauritius, São Tomé and Príncipe, Seychelles, and Tanzania (Zanzibar). Madagascar has no country allocation in the March 2024 table. Do not treat the USD 4,943,086 total as Mauritius funding. Cabinet noted a Mauritius launch at the United Docks, Port Louis, on 25 September 2026 — that is an event venue, not a surveyed works site.",
+      "Nine AISCC member states: Cabo Verde, Comoros, Equatorial Guinea, Guinea-Bissau, Madagascar, Mauritius, São Tomé and Príncipe, Seychelles, and Tanzania (Zanzibar). Madagascar has no country allocation in the March 2024 table. Do not treat the USD 4,943,086 total as Mauritius funding. Cabinet noted a Mauritius launch at the United Docks, Port Louis, on 25 September 2026 - that is an event venue, not a surveyed works site.",
     adminUnit: "Regional (AISCC)",
     district: "AISCC member states",
     lat: null,
@@ -511,7 +511,7 @@ export const projects: Project[] = [
     sources: [
       {
         title:
-          "Approved GCF readiness proposal — RESIslands Project (PDF)",
+          "Approved GCF readiness proposal - RESIslands Project (PDF)",
         url: "https://www.greenclimate.fund/sites/default/files/document/20240330-multicountry-uneca.pdf",
         publisher: "Green Climate Fund",
         asOf: "2024-03-30",
@@ -520,14 +520,14 @@ export const projects: Project[] = [
       },
       {
         title:
-          "GCF document page — Strengthening the institutional capacities of AISCC member states (RESIslands)",
+          "GCF document page - Strengthening the institutional capacities of AISCC member states (RESIslands)",
         url: "https://www.greenclimate.fund/document/strengthening-institutional-capacities-african-island-states-climate-commission-aiscc",
         publisher: "Green Climate Fund",
         asOf: "2024-03-30",
         notes: "Document type: approved readiness proposal. Cover date 30 March 2024.",
       },
       {
-        title: "Highlights of Cabinet Meeting — Friday 11 September 2026",
+        title: "Highlights of Cabinet Meeting - Friday 11 September 2026",
         url: "https://pmo.govmu.org/CabinetDecision/2026/Highlights%20of%20Cabinet%20Meeting%20-%20Friday%2011%20September%202026.pdf",
         publisher: "Prime Minister’s Office, Mauritius",
         asOf: "2026-09-11",
@@ -541,9 +541,9 @@ export const projects: Project[] = [
   {
     id: "mu-gcf-nap-infra",
     title:
-      "GCF NAP — infrastructure, bridges, flood-prone areas and coastal zones",
+      "GCF NAP - infrastructure, bridges, flood-prone areas and coastal zones",
     summary:
-      "The 2021 updated NDC states that a National Adaptation Plan on infrastructure, bridges and culverts, DRR–flood prone areas and coastal zones is being formulated for a total of USD 2.5 million from the GCF.",
+      "The 2021 updated NDC states that a National Adaptation Plan on infrastructure, bridges and culverts, DRR-flood prone areas and coastal zones is being formulated for a total of USD 2.5 million from the GCF.",
     kind: "readiness",
     climateObjective: "adaptation",
     hazards: ["flood", "coastal"],
@@ -584,7 +584,7 @@ export const projects: Project[] = [
   },
   {
     id: "mu-gcf-nap-health",
-    title: "GCF NAP — health",
+    title: "GCF NAP - health",
     summary:
       "The 2021 updated NDC states that a National Adaptation Plan on health is being formulated for a total of USD 425,000 from the GCF.",
     kind: "readiness",
@@ -628,7 +628,7 @@ export const projects: Project[] = [
     id: "mu-farmers-gcca",
     title: "Smallholder farmer climate-adaptation grant (GCCA / Commonwealth)",
     summary:
-      "The Commonwealth Climate Finance Access Hub reported a €600,000 grant from the European Commission’s Global Climate Alliance Programme, plus €500,000 from the Government of Mauritius, to train smallholder farmers — including women’s groups — on climate risks and income diversification.",
+      "The Commonwealth Climate Finance Access Hub reported a €600,000 grant from the European Commission’s Global Climate Alliance Programme, plus €500,000 from the Government of Mauritius, to train smallholder farmers - including women’s groups - on climate risks and income diversification.",
     kind: "grant_programme",
     climateObjective: "adaptation",
     hazards: ["drought", "heat"],

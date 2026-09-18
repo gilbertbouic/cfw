@@ -3,14 +3,11 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 import {
-  GEOGRAPHY_LABELS,
-  HAZARD_LABELS,
-  OBJECTIVE_LABELS,
-  STATUS_LABELS,
   type GeographyScope,
   type HazardType,
   type ProjectStatus,
 } from "@/data/types";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 type Props = {
   funders: string[];
@@ -20,6 +17,8 @@ export function ProjectFilters({ funders }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [pending, startTransition] = useTransition();
+  const { dict } = useI18n();
+  const copy = dict.projectFilters;
 
   const update = useCallback(
     (key: string, value: string) => {
@@ -43,74 +42,74 @@ export function ProjectFilters({ funders }: Props) {
       aria-busy={pending}
     >
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted xl:col-span-2">
-        Search
+        {copy.search}
         <input
           type="search"
           name="q"
           defaultValue={searchParams.get("q") ?? ""}
-          placeholder="Title, funder, place…"
+          placeholder={copy.searchPlaceholder}
           className={`${selectClass} mt-1`}
           onChange={(e) => update("q", e.target.value)}
         />
       </label>
 
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted">
-        Status
+        {copy.status}
         <select
           className={`${selectClass} mt-1`}
           value={searchParams.get("status") ?? "all"}
           onChange={(e) => update("status", e.target.value)}
         >
-          <option value="all">All statuses</option>
-          {(Object.keys(STATUS_LABELS) as ProjectStatus[]).map((s) => (
+          <option value="all">{copy.allStatuses}</option>
+          {(Object.keys(dict.labels.status) as ProjectStatus[]).map((s) => (
             <option key={s} value={s}>
-              {STATUS_LABELS[s]}
+              {dict.labels.status[s]}
             </option>
           ))}
         </select>
       </label>
 
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted">
-        Geography
+        {copy.geography}
         <select
           className={`${selectClass} mt-1`}
           value={searchParams.get("geography") ?? "all"}
           onChange={(e) => update("geography", e.target.value)}
         >
-          <option value="all">All geographies</option>
-          {(Object.keys(GEOGRAPHY_LABELS) as GeographyScope[]).map((g) => (
+          <option value="all">{copy.allGeographies}</option>
+          {(Object.keys(dict.labels.geography) as GeographyScope[]).map((g) => (
             <option key={g} value={g}>
-              {GEOGRAPHY_LABELS[g]}
+              {dict.labels.geography[g]}
             </option>
           ))}
         </select>
       </label>
 
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted">
-        Hazard
+        {copy.hazard}
         <select
           className={`${selectClass} mt-1`}
           value={searchParams.get("hazard") ?? "all"}
           onChange={(e) => update("hazard", e.target.value)}
         >
-          <option value="all">All hazards</option>
-          {(Object.keys(HAZARD_LABELS) as HazardType[]).map((h) => (
+          <option value="all">{copy.allHazards}</option>
+          {(Object.keys(dict.labels.hazard) as HazardType[]).map((h) => (
             <option key={h} value={h}>
-              {HAZARD_LABELS[h]}
+              {dict.labels.hazard[h]}
             </option>
           ))}
         </select>
       </label>
 
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted">
-        Objective
+        {copy.objective}
         <select
           className={`${selectClass} mt-1`}
           value={searchParams.get("objective") ?? "all"}
           onChange={(e) => update("objective", e.target.value)}
         >
-          <option value="all">All objectives</option>
-          {Object.entries(OBJECTIVE_LABELS).map(([k, label]) => (
+          <option value="all">{copy.allObjectives}</option>
+          {Object.entries(dict.labels.objective).map(([k, label]) => (
             <option key={k} value={k}>
               {label}
             </option>
@@ -119,13 +118,13 @@ export function ProjectFilters({ funders }: Props) {
       </label>
 
       <label className="block text-xs font-semibold uppercase tracking-wide text-muted sm:col-span-2 lg:col-span-1 xl:col-span-2">
-        Funder
+        {copy.funder}
         <select
           className={`${selectClass} mt-1`}
           value={searchParams.get("funder") ?? "all"}
           onChange={(e) => update("funder", e.target.value)}
         >
-          <option value="all">All funders</option>
+          <option value="all">{copy.allFunders}</option>
           {funders.map((f) => (
             <option key={f} value={f}>
               {f}

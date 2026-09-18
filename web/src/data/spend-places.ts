@@ -2,7 +2,7 @@ import { getAllProjects } from "./projects";
 import type { SpendPlace } from "./types";
 
 const PIN_NOTE =
-  "Approximate locality for a place named in a public report — not a surveyed works polygon.";
+  "Approximate locality for a place named in a public report - not a surveyed works polygon.";
 
 /**
  * Named places where public reports say climate-fund works happened.
@@ -138,7 +138,7 @@ export const spendPlaces: SpendPlace[] = [
     includeInDefaultView: true,
     precision: "locality",
     worksNote:
-      "CEB and UNDP: 1.5 MW BESS at Pointe Monnier, Rodrigues, described as partly financed by the UNDP–GCF partnership.",
+      "CEB and UNDP: 1.5 MW BESS at Pointe Monnier, Rodrigues, described as partly financed by the UNDP-GCF partnership.",
     spendAmount: null,
     spendCurrency: "USD",
     spendNote: `${PIN_NOTE} Rodrigues amount is not isolated in the CEB or UNDP pages reviewed.`,
@@ -150,7 +150,7 @@ export const spendPlaces: SpendPlace[] = [
   {
     id: "fp033-rodrigues-pv",
     projectId: "mu-gcf-fp033",
-    name: "Rodrigues — rooftop solar (island-level)",
+    name: "Rodrigues - rooftop solar (island-level)",
     island: "rodrigues",
     lat: -19.718,
     lng: 63.418,
@@ -170,7 +170,7 @@ export const spendPlaces: SpendPlace[] = [
   {
     id: "fp033-agalega",
     projectId: "mu-gcf-fp033",
-    name: "Agaléga — PV mini-grid component (island-level)",
+    name: "Agaléga - PV mini-grid component (island-level)",
     island: "agalega",
     lat: -10.4,
     lng: 56.6,
@@ -180,7 +180,7 @@ export const spendPlaces: SpendPlace[] = [
       "GCF FP033 describes Phase 2 as a photovoltaic mini-power grid for Agaléga. Site-level spend is not published on the GCF project page.",
     spendAmount: null,
     spendCurrency: "USD",
-    spendNote: `${PIN_NOTE} Off the default Mauritius–Rodrigues map frame. Island-level only.`,
+    spendNote: `${PIN_NOTE} Off the default Mauritius-Rodrigues map frame. Island-level only.`,
     sourceUrl: "https://www.greenclimate.fund/project/fp033",
     sourceTitle: "GCF FP033 project page",
     sourcePublisher: "Green Climate Fund",
@@ -189,7 +189,7 @@ export const spendPlaces: SpendPlace[] = [
   {
     id: "af-mon-choisy",
     projectId: "mu-af-coastal",
-    name: "Mon Choisy public beach — coastal protection",
+    name: "Mon Choisy public beach - coastal protection",
     island: "mauritius",
     lat: -20.013,
     lng: 57.556,
@@ -199,7 +199,7 @@ export const spendPlaces: SpendPlace[] = [
       "Adaptation Fund project page names Mon Choisy as one of three coastal sites (with Rivière des Galets and Quatre Soeurs). UNDP marks the programme completed.",
     spendAmount: null,
     spendCurrency: "USD",
-    spendNote: `${PIN_NOTE} National AF grant USD 9,119,240 was fully disbursed to the accredited entity by June 2020. Site-level outturn is not on the AF project page. A 2011 proposal table listed USD 2.0 million for this site — that is a proposal estimate, not an audited spend figure, so it is not shown as spent.`,
+    spendNote: `${PIN_NOTE} National AF grant USD 9,119,240 was fully disbursed to the accredited entity by June 2020. Site-level outturn is not on the AF project page. A 2011 proposal table listed USD 2.0 million for this site - that is a proposal estimate, not an audited spend figure, so it is not shown as spent.`,
     sourceUrl:
       "https://www.adaptation-fund.org/project/climate-change-adaptation-programme-in-the-coastal-zone-of-mauritius/",
     sourceTitle: "AF: Climate Change Adaptation Programme in the Coastal Zone of Mauritius",
@@ -209,7 +209,7 @@ export const spendPlaces: SpendPlace[] = [
   {
     id: "af-riviere-des-galets",
     projectId: "mu-af-coastal",
-    name: "Rivière des Galets — coastal protection",
+    name: "Rivière des Galets - coastal protection",
     island: "mauritius",
     lat: -20.507,
     lng: 57.518,
@@ -229,7 +229,7 @@ export const spendPlaces: SpendPlace[] = [
   {
     id: "af-quatre-soeurs",
     projectId: "mu-af-coastal",
-    name: "Quatre Soeurs — coastal protection and refuge centre",
+    name: "Quatre Soeurs - coastal protection and refuge centre",
     island: "mauritius",
     lat: -20.299,
     lng: 57.791,

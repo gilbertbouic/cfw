@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { SpendPlace } from "@/data/types";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 const MU = { west: 57.28, east: 57.86, north: -19.97, south: -20.54 };
 const ROD = { west: 63.25, east: 63.52, north: -19.66, south: -19.785 };
@@ -77,6 +80,7 @@ function IslandFigure({
   places,
   width,
   height,
+  pinTitle,
 }: {
   title: string;
   bounds: Bounds;
@@ -84,6 +88,7 @@ function IslandFigure({
   places: SpendPlace[];
   width: number;
   height: number;
+  pinTitle: string;
 }) {
   const path = ringToPath(ring, bounds, width, height);
   return (
@@ -131,7 +136,9 @@ function IslandFigure({
               >
                 {label}
               </text>
-              <title>{p.name} — site-level spend not reported</title>
+              <title>
+                {pinTitle.replace("{name}", p.name)}
+              </title>
             </a>
           );
         })}
@@ -141,6 +148,8 @@ function IslandFigure({
 }
 
 export function WorksSchematic({ places }: { places: SpendPlace[] }) {
+  const { dict } = useI18n();
+  const copy = dict.worksSchematic;
   const mauritius = places.filter(
     (p) => p.island === "mauritius" && p.includeInDefaultView,
   );
@@ -153,25 +162,27 @@ export function WorksSchematic({ places }: { places: SpendPlace[] }) {
     <div className="space-y-3">
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <IslandFigure
-          title="Mauritius — named localities"
+          title={copy.mauritiusTitle}
           bounds={MU}
           ring={MAURITIUS_RING}
           places={mauritius}
           width={280}
           height={360}
+          pinTitle={copy.pinTitle}
         />
         <IslandFigure
-          title="Rodrigues — named localities"
+          title={copy.rodriguesTitle}
           bounds={ROD}
           ring={RODRIGUES_RING}
           places={rodrigues}
           width={280}
           height={220}
+          pinTitle={copy.pinTitle}
         />
       </div>
       {agalega.length > 0 && (
         <p className="text-sm text-muted">
-          Agaléga (off this figure):{" "}
+          {copy.agalegaOff}{" "}
           {agalega.map((p) => (
             <Link
               key={p.id}
@@ -181,13 +192,10 @@ export function WorksSchematic({ places }: { places: SpendPlace[] }) {
               {p.name}
             </Link>
           ))}
-          . Site-level spend not reported.
+          . {copy.siteSpendNotReported}
         </p>
       )}
-      <p className="text-xs text-muted">
-        Schematic outline for orientation only — not a surveyed coastline.
-        Dots are approximate localities named in public reports.
-      </p>
+      <p className="text-xs text-muted">{copy.caption}</p>
     </div>
   );
 }

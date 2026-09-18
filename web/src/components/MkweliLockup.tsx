@@ -1,3 +1,7 @@
+"use client";
+
+import { useI18n } from "@/i18n/LanguageProvider";
+
 type Props = {
   className?: string;
   size?: "sm" | "md";
@@ -5,6 +9,7 @@ type Props = {
 
 export function MkweliLockup({ className = "", size = "sm" }: Props) {
   const px = size === "md" ? 28 : 20;
+  const { dict } = useI18n();
   return (
     <a
       href="https://mkweli.tech"
@@ -18,7 +23,7 @@ export function MkweliLockup({ className = "", size = "sm" }: Props) {
         className="shrink-0 object-contain"
         style={{ width: px, height: px }}
       />
-      <span>A Mkweli product</span>
+      <span>{dict.mkweli.product}</span>
     </a>
   );
 }

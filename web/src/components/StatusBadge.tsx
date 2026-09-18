@@ -1,6 +1,10 @@
-import { STATUS_COLORS, STATUS_LABELS, type ProjectStatus } from "@/data/types";
+"use client";
+
+import { STATUS_COLORS, type ProjectStatus } from "@/data/types";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export function StatusBadge({ status }: { status: ProjectStatus }) {
+  const { dict } = useI18n();
   const color = STATUS_COLORS[status];
   return (
     <span
@@ -15,7 +19,7 @@ export function StatusBadge({ status }: { status: ProjectStatus }) {
         style={{ backgroundColor: color }}
         aria-hidden
       />
-      {STATUS_LABELS[status]}
+      {dict.labels.status[status]}
     </span>
   );
 }

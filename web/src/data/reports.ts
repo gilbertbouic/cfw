@@ -108,7 +108,7 @@ export const donorReports: DonorReport[] = [
     id: "af-coastal-library",
     projectId: "mu-af-coastal",
     title:
-      "Adaptation Fund coastal programme — PPR, mid-term, completion and final evaluation",
+      "Adaptation Fund coastal programme - PPR, mid-term, completion and final evaluation",
     type: "library",
     reportingPeriod: null,
     coverDate: null,
@@ -120,7 +120,7 @@ export const donorReports: DonorReport[] = [
   {
     id: "af-coral-library",
     projectId: "mu-af-coral",
-    title: "Adaptation Fund coral programme — project documents and PPRs",
+    title: "Adaptation Fund coral programme - project documents and PPRs",
     type: "library",
     reportingPeriod: null,
     coverDate: null,
@@ -186,7 +186,7 @@ export const donorReports: DonorReport[] = [
   {
     id: "resislands-proposal-2024",
     projectId: "mu-gcf-resislands",
-    title: "Approved GCF readiness proposal — RESIslands Project",
+    title: "Approved GCF readiness proposal - RESIslands Project",
     type: "library",
     reportingPeriod: null,
     coverDate: "2024-03-30",
